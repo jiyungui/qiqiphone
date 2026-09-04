@@ -140,10 +140,10 @@ html, body {
   flex: 1;
   display: flex;
   width: 300%;
-  height: calc(100% - 44px - 100px - var(--sat) - var(--sab));
   touch-action: pan-y pinch-zoom;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
+  min-height: 0;
 }
 
 .screen-page {
@@ -215,8 +215,10 @@ html, body {
   justify-content: center;
   align-items: center;
   gap: 7px;
-  height: 16px;
-  margin-bottom: 6px;
+  height: 12px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  flex-shrink: 0;
 }
 .dot {
   width: 6.5px;
@@ -235,8 +237,10 @@ html, body {
 /* 底部 Home 横条 */
 .home-indicator {
   width: 134px;
-  height: 5px;
+  height: 4.5px;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 100px;
-  margin: 0 auto calc(6px + var(--sab)) auto;
+  margin: 0 auto;
+  margin-bottom: max(4px, var(--sab));
+  flex-shrink: 0;
 }

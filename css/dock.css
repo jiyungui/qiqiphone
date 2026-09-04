@@ -2,17 +2,18 @@
    底部 Dock 栏样式 (4 个常用应用：设置-美化-短信-频道)
    ========================================================================== */
 .dock-container {
-  margin: 0 16px 12px 16px;
+  margin: 0 16px 2px 16px;
   background: var(--dock-bg);
   backdrop-filter: blur(25px) saturate(180%);
   -webkit-backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: 28px;
-  padding: 10px 14px;
+  padding: 8px 14px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
 }
 
 .dock-item {
