@@ -1,10 +1,16 @@
 /**
  * apps.js - 主屏幕应用管理
- * 第一页 6 个应用 + 第二页 6 个应用 + 底部 Dock 栏 4 个应用
- * 纯白灰 INS 极简线条矢量设计（严禁 Emoji）
+ * 第一页 8 个应用 (4 列 x 2 行标准网格):
+ *   第一行: chat, 记忆世界, 相册, 你懂得
+ *   第二行: 日记, 世界书, 老福特, 查手机
+ * 第二页 4 个应用 (左侧 2x2 网格，无背后框，对应右侧 Memory 小组件):
+ *   视频, 恋人之家, 闲鱼, 美团
+ * 底部 Dock 栏 4 个应用:
+ *   设置, 美化, 短信, 频道
+ * 严格遵从白灰 INS 极简线条矢量风格（无任何 Emoji）
  */
 
-// 第一页主屏 6 个 APP 配置
+// 第一页主屏 8 个 APP
 const PAGE_ONE_APPS = [
   {
     id: 'chat',
@@ -29,6 +35,14 @@ const PAGE_ONE_APPS = [
             <rect x="3" y="3" width="18" height="18" rx="3" ry="3"/>
             <circle cx="8.5" cy="8.5" r="1.5"/>
             <polyline points="21 15 16 10 5 21"/>
+          </svg>`
+  },
+  {
+    id: 'you-know',
+    name: '你懂得',
+    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
           </svg>`
   },
   {
@@ -58,64 +72,10 @@ const PAGE_ONE_APPS = [
             <line x1="12" y1="7" x2="16" y2="7"/>
             <line x1="14" y1="5" x2="14" y2="9"/>
           </svg>`
-  }
-];
-
-// 第二页主屏 6 个 APP 配置：视频、恋人之家、闲鱼、美团、你懂得、查手机
-const PAGE_TWO_APPS = [
-  {
-    id: 'video',
-    name: '视频',
-    // 电影摄影机/放映框
-    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="4" ry="4"/>
-            <polygon points="10 8 16 12 10 16 10 8"/>
-          </svg>`
-  },
-  {
-    id: 'lovers-home',
-    name: '恋人之家',
-    // 建筑与双心结合徽标
-    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <path d="M12 11c-1.5-1.5-3.5 0-3.5 1.5 0 2 3.5 4 3.5 4s3.5-2 3.5-4c0-1.5-2-1.5-3.5-1.5z"/>
-          </svg>`
-  },
-  {
-    id: 'xianyu',
-    name: '闲鱼',
-    // 灵动鱼形几何线条
-    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 12c4-8 12-4 15-2-3 2-4 8-10 8-3 0-5-2-5-6z"/>
-            <path d="M6 12L2 9v6l4-3z"/>
-            <circle cx="15" cy="11" r="1"/>
-          </svg>`
-  },
-  {
-    id: 'meituan',
-    name: '美团',
-    // 精致袋鼠耳朵/极简餐勺餐叉
-    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-            <line x1="6" y1="1" x2="6" y2="4"/>
-            <line x1="10" y1="1" x2="10" y2="4"/>
-            <line x1="14" y1="1" x2="14" y2="4"/>
-          </svg>`
-  },
-  {
-    id: 'you-know',
-    name: '你懂得',
-    // 隐秘锁扣/神秘面具眼睛
-    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-            <circle cx="12" cy="12" r="3"/>
-          </svg>`
   },
   {
     id: 'phone-check',
     name: '查手机',
-    // 手机雷达扫描/私密侦测
     svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <rect x="5" y="2" width="14" height="20" rx="3" ry="3"/>
             <line x1="12" y1="18" x2="12.01" y2="18"/>
@@ -125,7 +85,47 @@ const PAGE_TWO_APPS = [
   }
 ];
 
-// 底部 Dock 栏 4 个应用配置
+// 第二页中部左侧 4 个 APP (横排俩竖排俩 2x2): 视频、恋人之家、闲鱼、美团
+const PAGE_TWO_MID_LEFT_APPS = [
+  {
+    id: 'video',
+    name: '视频',
+    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="4" ry="4"/>
+            <polygon points="10 8 16 12 10 16 10 8"/>
+          </svg>`
+  },
+  {
+    id: 'lovers-home',
+    name: '恋人之家',
+    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <path d="M12 11c-1.5-1.5-3.5 0-3.5 1.5 0 2 3.5 4 3.5 4s3.5-2 3.5-4c0-1.5-2-1.5-3.5-1.5z"/>
+          </svg>`
+  },
+  {
+    id: 'xianyu',
+    name: '闲鱼',
+    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 12c4-8 12-4 15-2-3 2-4 8-10 8-3 0-5-2-5-6z"/>
+            <path d="M6 12L2 9v6l4-3z"/>
+            <circle cx="15" cy="11" r="1"/>
+          </svg>`
+  },
+  {
+    id: 'meituan',
+    name: '美团',
+    svg: `<svg class="app-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+            <line x1="6" y1="1" x2="6" y2="4"/>
+            <line x1="10" y1="1" x2="10" y2="4"/>
+            <line x1="14" y1="1" x2="14" y2="4"/>
+          </svg>`
+  }
+];
+
+// 底部 Dock 栏 4 个应用
 const DOCK_APPS = [
   {
     id: 'settings',
@@ -185,19 +185,20 @@ class AppManager {
   }
 
   renderPageTwoApps() {
-    const grid = document.getElementById('page-two-apps-grid');
-    if (!grid) return;
-
-    grid.innerHTML = PAGE_TWO_APPS.map(app => `
-      <div class="app-item" onclick="appManager.launchApp('${app.id}', '${app.name}')">
-        <div class="app-icon">
-          <div class="app-icon-inner">
-            ${app.svg}
+    // 渲染第二页中部左侧 4 个 APP (2x2)
+    const midLeftGrid = document.getElementById('page2-mid-left-apps');
+    if (midLeftGrid) {
+      midLeftGrid.innerHTML = PAGE_TWO_MID_LEFT_APPS.map(app => `
+        <div class="app-item" onclick="appManager.launchApp('${app.id}', '${app.name}')">
+          <div class="app-icon">
+            <div class="app-icon-inner">
+              ${app.svg}
+            </div>
           </div>
+          <div class="app-label">${app.name}</div>
         </div>
-        <div class="app-label">${app.name}</div>
-      </div>
-    `).join('');
+      `).join('');
+    }
   }
 
   renderDockApps() {

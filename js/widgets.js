@@ -1,12 +1,13 @@
 /**
  * widgets.js - 小组件渲染与可持久化配置引擎
- * 负责 P1, P2, P3 的交互渲染、弹窗编辑、原图无损转存到 IndexedDB
- * 默认图片全部采用高级浅灰色纯色/极简底图，文字采用随笔语录风格
+ * 第一页组件: P1 (宽幅画报), P2 (咖啡胶囊), P3 (日历随笔)
+ * 第二页组件: P1 (Story Mode 故事模式), P2 (Memory 记忆叠卡)
+ * 全部支持 IndexedDB 无损高清图片持久化存储，默认浅灰，纯正白灰语录风格
  */
 
-// 高质感浅灰色占位矢量图 (SVG Base64)，无外部依赖，纯净白灰INS感
 const LIGHT_GRAY_PLACEHOLDER = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23E8EAE8'/%3E%3Cpath d='M160 200h80M200 160v80' stroke='%23D0D4D0' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E";
 
+// 第一页默认数据
 const DEFAULT_P1_DATA = {
   headerTitle: 'Daily Ending...',
   img: LIGHT_GRAY_PLACEHOLDER,
@@ -34,6 +35,37 @@ const DEFAULT_P3_DATA = {
   pillText: '白灰色的清晨，心绪像落下的微尘般安静。'
 };
 
+// 第二页默认数据：Story Mode 故事卡
+const DEFAULT_PAGE2_P1_DATA = {
+  title: 'Story Mode',
+  tag: 'STORY',
+  avatar: LIGHT_GRAY_PLACEHOLDER,
+  userName: '测试员',
+  userBio: 'If only I were in your eyes...',
+  num: '#1',
+  img1: LIGHT_GRAY_PLACEHOLDER,
+  img2: LIGHT_GRAY_PLACEHOLDER,
+  img3: LIGHT_GRAY_PLACEHOLDER,
+  img4: LIGHT_GRAY_PLACEHOLDER,
+  quoteText: '跟我一起看星星吧，一起聊哪里是北极星，哪里是你的星座，哪里是你的曾经。【片刻须臾就好】',
+  date: '2026年06月13日',
+  time: '08:58',
+  rerollText: '+ Latest Re-roll'
+};
+
+// 第二页默认数据：Memory 记忆卡
+const DEFAULT_PAGE2_P2_DATA = {
+  title: 'Memory',
+  avatarLeft: LIGHT_GRAY_PLACEHOLDER,
+  avatarCenter: LIGHT_GRAY_PLACEHOLDER,
+  avatarRight: LIGHT_GRAY_PLACEHOLDER,
+  memoriesCount: '0 memories',
+  symbolFace: '“ > 0 < ”',
+  total: '0',
+  pinned: '0',
+  pending: '0'
+};
+
 class WidgetManager {
   constructor() {
     this.modalEl = document.getElementById('edit-modal');
@@ -47,12 +79,14 @@ class WidgetManager {
     await this.renderWidgetP1();
     await this.renderWidgetP2();
     await this.renderWidgetP3();
+    await this.renderPage2WidgetP1();
+    await this.renderPage2WidgetP2();
     this.bindModalEvents();
   }
 
-  // ------------------------------------------------------------------------
-  // P1 小组件渲染与编辑
-  // ------------------------------------------------------------------------
+  // ========================================================================
+  // 第一页小组件渲染
+  // ========================================================================
   async renderWidgetP1() {
     const container = document.getElementById('widget-p1-mount');
     if (!container) return;
@@ -72,13 +106,11 @@ class WidgetManager {
           <div class="widget-p1-title-script">${data.headerTitle || 'Daily Ending...'}</div>
         </div>
         <div class="widget-p1-banner">
-          <!-- 回形针 SVG 装饰 -->
           <svg class="widget-p1-clip" viewBox="0 0 32 40" fill="none" stroke="#444444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M16 8v20a6 6 0 0 1-12 0V12a8 8 0 0 1 16 0v16a10 10 0 0 1-20 0V16" />
           </svg>
           <img class="widget-p1-img" src="${data.img || LIGHT_GRAY_PLACEHOLDER}" alt="Cover">
           
-          <!-- 右侧半透明 Ins 风格功能按钮 -->
           <div class="widget-p1-floating-actions" onclick="event.stopPropagation()">
             <div class="widget-p1-action-btn" title="Like" onclick="widgetManager.showToast('Collected')">
               <svg class="widget-p1-action-svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -91,7 +123,6 @@ class WidgetManager {
             </div>
           </div>
 
-          <!-- 左下角磨砂玻璃贴纸气泡 -->
           <div class="widget-p1-sticker">
             <img class="widget-p1-avatar" src="${data.stickerAvatar || LIGHT_GRAY_PLACEHOLDER}" alt="Sticker">
             <span class="widget-p1-quote">${data.stickerQuote || 'Whisper with the silent wind.'}</span>
@@ -109,9 +140,6 @@ class WidgetManager {
     `;
   }
 
-  // ------------------------------------------------------------------------
-  // P2 小组件渲染
-  // ------------------------------------------------------------------------
   async renderWidgetP2() {
     const container = document.getElementById('widget-p2-mount');
     if (!container) return;
@@ -157,9 +185,6 @@ class WidgetManager {
     `;
   }
 
-  // ------------------------------------------------------------------------
-  // P3 小组件渲染
-  // ------------------------------------------------------------------------
   async renderWidgetP3() {
     const container = document.getElementById('widget-p3-mount');
     if (!container) return;
@@ -222,9 +247,155 @@ class WidgetManager {
     `;
   }
 
-  // ------------------------------------------------------------------------
-  // 通用自定义编辑表单与无损图片转换
-  // ------------------------------------------------------------------------
+  // ========================================================================
+  // 第二页小组件渲染 (P1 Story Mode, P2 Memory)
+  // ========================================================================
+  async renderPage2WidgetP1() {
+    const container = document.getElementById('page2-widget-p1-mount');
+    if (!container) return;
+
+    let data = await window.storageDB.getWidgetData('p2_p1');
+    if (!data) {
+      data = DEFAULT_PAGE2_P1_DATA;
+      await window.storageDB.saveWidgetData('p2_p1', data);
+    }
+
+    container.innerHTML = `
+      <div class="phone-widget-card widget-p2-p1" onclick="widgetManager.openEditDialog('p2_p1')">
+        <div class="widget-edit-hint">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        
+        <!-- 顶部导航条 -->
+        <div class="p2-p1-top-nav">
+          <span class="p2-p1-badge">‹ ${data.tag || 'STORY'}</span>
+          <div class="p2-p1-center-title">
+            <span>♡</span>
+            <span>${data.title || 'Story Mode'}</span>
+            <span>♡</span>
+          </div>
+          <span style="width: 32px"></span>
+        </div>
+
+        <!-- 用户名行 -->
+        <div class="p2-p1-user-bar">
+          <div class="p2-p1-user-left">
+            <img class="p2-p1-avatar" src="${data.avatar || LIGHT_GRAY_PLACEHOLDER}" alt="Avatar">
+            <div class="p2-p1-user-info">
+              <span class="p2-p1-username">${data.userName || '测试员'}</span>
+              <span class="p2-p1-user-sub">${data.userBio || 'If only I were in your eyes...'}</span>
+            </div>
+          </div>
+          <div class="p2-p1-user-right">
+            <span>♡ ♡ ♥</span>
+            <span>${data.num || '#1'}</span>
+          </div>
+        </div>
+
+        <!-- 4 张照片网格 (支持分别上传更换，默认浅灰) -->
+        <div class="p2-p1-photos-grid">
+          <div class="p2-p1-photo-item">
+            <img class="p2-p1-photo-img" src="${data.img1 || LIGHT_GRAY_PLACEHOLDER}">
+          </div>
+          <div class="p2-p1-photo-item">
+            <img class="p2-p1-photo-img" src="${data.img2 || LIGHT_GRAY_PLACEHOLDER}">
+          </div>
+          <div class="p2-p1-photo-item">
+            <img class="p2-p1-photo-img" src="${data.img3 || LIGHT_GRAY_PLACEHOLDER}">
+          </div>
+          <div class="p2-p1-photo-item">
+            <img class="p2-p1-photo-img" src="${data.img4 || LIGHT_GRAY_PLACEHOLDER}">
+          </div>
+        </div>
+
+        <!-- 随笔语录文案区 -->
+        <div class="p2-p1-quote-card">
+          <div class="p2-p1-quote-body">
+            ${data.quoteText || '跟我一起看星星吧，一起聊哪里是北极星，哪里是你的星座，哪里是你的曾经。【片刻须臾就好】'}
+          </div>
+          <div class="p2-p1-quote-footer">
+            <span>${data.date || '2026年06月13日'} ${data.time || '08:58'}</span>
+            <span style="letter-spacing: 2px">★★★★★ ··· ⌫</span>
+          </div>
+        </div>
+
+        <!-- 底部黑条按键 -->
+        <div class="p2-p1-footer-action">
+          <span style="opacity: 0.7">↶</span>
+          <span>${data.rerollText || '+ Latest Re-roll'}</span>
+          <span>›</span>
+        </div>
+      </div>
+    `;
+  }
+
+  async renderPage2WidgetP2() {
+    const container = document.getElementById('page2-widget-p2-mount');
+    if (!container) return;
+
+    let data = await window.storageDB.getWidgetData('p2_p2');
+    if (!data) {
+      data = DEFAULT_PAGE2_P2_DATA;
+      await window.storageDB.saveWidgetData('p2_p2', data);
+    }
+
+    container.innerHTML = `
+      <div class="phone-widget-card widget-p2-p2" onclick="widgetManager.openEditDialog('p2_p2')">
+        <div class="widget-edit-hint">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+
+        <!-- 顶部标题 -->
+        <div class="p2-p2-header">
+          <span style="font-size: 13px; color: #555">‹</span>
+          <span class="p2-p2-title">${data.title || 'Memory'}</span>
+          <div class="p2-p2-actions">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span style="font-size: 12px; color: #333">+</span>
+          </div>
+        </div>
+
+        <!-- 3 张卡片叠层视觉 -->
+        <div class="p2-p2-cards-stage">
+          <div class="p2-p2-card-bg-left">
+            <img class="p2-p2-card-img" src="${data.avatarLeft || LIGHT_GRAY_PLACEHOLDER}">
+          </div>
+          <div class="p2-p2-card-center">
+            <img class="p2-p2-card-img" src="${data.avatarCenter || LIGHT_GRAY_PLACEHOLDER}">
+          </div>
+          <div class="p2-p2-card-bg-right">
+            <img class="p2-p2-card-img" src="${data.avatarRight || LIGHT_GRAY_PLACEHOLDER}">
+          </div>
+        </div>
+
+        <!-- 居中信息 -->
+        <div class="p2-p2-info-text">
+          <span class="p2-p2-memories-count">${data.memoriesCount || '0 memories'}</span>
+          <span class="p2-p2-symbol-face">‹ ${data.symbolFace || '“ > 0 < ”'} ›</span>
+        </div>
+
+        <!-- 底部 0 0 0 数据面板 -->
+        <div class="p2-p2-data-board">
+          <div class="p2-p2-data-col">
+            <span class="p2-p2-data-num">${data.total || '0'}</span>
+            <span class="p2-p2-data-label">TOTAL</span>
+          </div>
+          <div class="p2-p2-data-col">
+            <span class="p2-p2-data-num">${data.pinned || '0'}</span>
+            <span class="p2-p2-data-label">PINNED</span>
+          </div>
+          <div class="p2-p2-data-col">
+            <span class="p2-p2-data-num">${data.pending || '0'}</span>
+            <span class="p2-p2-data-label">PENDING</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // ========================================================================
+  // 编辑弹窗
+  // ========================================================================
   async openEditDialog(widgetId) {
     this.currentEditingId = widgetId;
     let data = await window.storageDB.getWidgetData(widgetId);
@@ -232,24 +403,23 @@ class WidgetManager {
       if (widgetId === 'p1') data = DEFAULT_P1_DATA;
       if (widgetId === 'p2') data = DEFAULT_P2_DATA;
       if (widgetId === 'p3') data = DEFAULT_P3_DATA;
+      if (widgetId === 'p2_p1') data = DEFAULT_PAGE2_P1_DATA;
+      if (widgetId === 'p2_p2') data = DEFAULT_PAGE2_P2_DATA;
     }
     this.tempFormData = { ...data };
 
     let fieldsHtml = '';
     if (widgetId === 'p1') {
-      this.modalTitleEl.textContent = '自定义 P1 宽幅卡片组件';
+      this.modalTitleEl.textContent = '自定义第一页 P1 宽幅卡片';
       fieldsHtml = `
         <div class="edit-form-group">
           <label class="edit-form-label">顶部艺术标题</label>
           <input type="text" class="edit-input" id="field-headerTitle" value="${this.tempFormData.headerTitle || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">更换海报大图 (无损存储通道)</label>
+          <label class="edit-form-label">封面海报大图 (无损存储)</label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn">
-              <span>选择图片</span>
-              <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p1-img')">
-            </label>
+            <label class="edit-file-btn"><span>选择图片</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p1-img')"></label>
             <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'img', 'prev-p1-img')">设为浅灰默认</button>
             <img id="prev-p1-img" class="edit-file-preview" src="${this.tempFormData.img}">
           </div>
@@ -257,16 +427,13 @@ class WidgetManager {
         <div class="edit-form-group">
           <label class="edit-form-label">贴纸头像</label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn">
-              <span>选择头像</span>
-              <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'stickerAvatar', 'prev-p1-avatar')">
-            </label>
+            <label class="edit-file-btn"><span>选择头像</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'stickerAvatar', 'prev-p1-avatar')"></label>
             <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'stickerAvatar', 'prev-p1-avatar')">设为浅灰默认</button>
             <img id="prev-p1-avatar" class="edit-file-preview" src="${this.tempFormData.stickerAvatar}">
           </div>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">贴纸微言 / 文案语录</label>
+          <label class="edit-form-label">贴纸微言</label>
           <input type="text" class="edit-input" id="field-stickerQuote" value="${this.tempFormData.stickerQuote || ''}">
         </div>
         <div class="edit-form-group">
@@ -283,19 +450,16 @@ class WidgetManager {
         </div>
       `;
     } else if (widgetId === 'p2') {
-      this.modalTitleEl.textContent = '自定义 P2 胶囊卡片';
+      this.modalTitleEl.textContent = '自定义第一页 P2 胶囊卡片';
       fieldsHtml = `
         <div class="edit-form-group">
           <label class="edit-form-label">顶部胶囊文案</label>
           <input type="text" class="edit-input" id="field-searchWord" value="${this.tempFormData.searchWord || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">更换侧边照片 (无损存储通道)</label>
+          <label class="edit-form-label">侧边照片 (无损存储)</label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn">
-              <span>选择图片</span>
-              <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p2-img')">
-            </label>
+            <label class="edit-file-btn"><span>选择图片</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p2-img')"></label>
             <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'img', 'prev-p2-img')">设为浅灰默认</button>
             <img id="prev-p2-img" class="edit-file-preview" src="${this.tempFormData.img}">
           </div>
@@ -305,7 +469,7 @@ class WidgetManager {
           <input type="text" class="edit-input" id="field-line2" value="${this.tempFormData.line2 || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">状态 / 音律文案</label>
+          <label class="edit-form-label">音律文案</label>
           <input type="text" class="edit-input" id="field-line3" value="${this.tempFormData.line3 || ''}">
         </div>
         <div class="edit-form-group">
@@ -314,15 +478,12 @@ class WidgetManager {
         </div>
       `;
     } else if (widgetId === 'p3') {
-      this.modalTitleEl.textContent = '自定义 P3 日历随笔卡片';
+      this.modalTitleEl.textContent = '自定义第一页 P3 日历随笔卡片';
       fieldsHtml = `
         <div class="edit-form-group">
-          <label class="edit-form-label">顶部背景美图 (无损存储通道)</label>
+          <label class="edit-form-label">背景大图</label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn">
-              <span>选择图片</span>
-              <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p3-img')">
-            </label>
+            <label class="edit-file-btn"><span>选择图片</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p3-img')"></label>
             <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'img', 'prev-p3-img')">设为浅灰默认</button>
             <img id="prev-p3-img" class="edit-file-preview" src="${this.tempFormData.img}">
           </div>
@@ -336,23 +497,82 @@ class WidgetManager {
           <input type="text" class="edit-input" id="field-quoteTitle" value="${this.tempFormData.quoteTitle || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">底部便签小头像</label>
+          <label class="edit-form-label">便签头像</label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn">
-              <span>选择头像</span>
-              <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'pillAvatar', 'prev-p3-avatar')">
-            </label>
+            <label class="edit-file-btn"><span>选择头像</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'pillAvatar', 'prev-p3-avatar')"></label>
             <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'pillAvatar', 'prev-p3-avatar')">设为浅灰默认</button>
             <img id="prev-p3-avatar" class="edit-file-preview" src="${this.tempFormData.pillAvatar}">
           </div>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">便签日期</label>
-          <input type="text" class="edit-input" id="field-pillDate" value="${this.tempFormData.pillDate || ''}">
+          <label class="edit-form-label">便签心情语录</label>
+          <input type="text" class="edit-input" id="field-pillText" value="${this.tempFormData.pillText || ''}">
+        </div>
+      `;
+    } else if (widgetId === 'p2_p1') {
+      this.modalTitleEl.textContent = '自定义第二页 P1 故事模式卡片';
+      fieldsHtml = `
+        <div class="edit-form-group">
+          <label class="edit-form-label">用户昵称</label>
+          <input type="text" class="edit-input" id="field-userName" value="${this.tempFormData.userName || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">便签心情随笔语录</label>
-          <input type="text" class="edit-input" id="field-pillText" value="${this.tempFormData.pillText || ''}">
+          <label class="edit-form-label">签名微言</label>
+          <input type="text" class="edit-input" id="field-userBio" value="${this.tempFormData.userBio || ''}">
+        </div>
+        <div class="edit-form-group">
+          <label class="edit-form-label">用户头像</label>
+          <div class="edit-file-wrapper">
+            <label class="edit-file-btn"><span>选择头像</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'avatar', 'prev-p2p1-avatar')"></label>
+            <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'avatar', 'prev-p2p1-avatar')">设为浅灰默认</button>
+            <img id="prev-p2p1-avatar" class="edit-file-preview" src="${this.tempFormData.avatar}">
+          </div>
+        </div>
+        <div class="edit-form-group">
+          <label class="edit-form-label">随笔文案语录</label>
+          <textarea class="edit-textarea" id="field-quoteText">${this.tempFormData.quoteText || ''}</textarea>
+        </div>
+        <div class="edit-form-group">
+          <label class="edit-form-label">四张生活照片 (可分别更换)</label>
+          <div style="display:flex; gap:8px; flex-wrap:wrap">
+            <label class="edit-file-btn">图1<input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img1', 'prev-p2p1-1')"></label>
+            <img id="prev-p2p1-1" class="edit-file-preview" src="${this.tempFormData.img1}">
+            <label class="edit-file-btn">图2<input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img2', 'prev-p2p1-2')"></label>
+            <img id="prev-p2p1-2" class="edit-file-preview" src="${this.tempFormData.img2}">
+            <label class="edit-file-btn">图3<input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img3', 'prev-p2p1-3')"></label>
+            <img id="prev-p2p1-3" class="edit-file-preview" src="${this.tempFormData.img3}">
+            <label class="edit-file-btn">图4<input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img4', 'prev-p2p1-4')"></label>
+            <img id="prev-p2p1-4" class="edit-file-preview" src="${this.tempFormData.img4}">
+          </div>
+        </div>
+      `;
+    } else if (widgetId === 'p2_p2') {
+      this.modalTitleEl.textContent = '自定义第二页 P2 记忆卡片';
+      fieldsHtml = `
+        <div class="edit-form-group">
+          <label class="edit-form-label">标题</label>
+          <input type="text" class="edit-input" id="field-title" value="${this.tempFormData.title || ''}">
+        </div>
+        <div class="edit-form-group">
+          <label class="edit-form-label">中心主卡照片 (无损存储)</label>
+          <div class="edit-file-wrapper">
+            <label class="edit-file-btn"><span>选择图片</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'avatarCenter', 'prev-p2p2-c')"></label>
+            <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'avatarCenter', 'prev-p2p2-c')">设为浅灰默认</button>
+            <img id="prev-p2p2-c" class="edit-file-preview" src="${this.tempFormData.avatarCenter}">
+          </div>
+        </div>
+        <div class="edit-form-group">
+          <label class="edit-form-label">统计说明文案</label>
+          <input type="text" class="edit-input" id="field-memoriesCount" value="${this.tempFormData.memoriesCount || ''}">
+        </div>
+        <div class="edit-form-group">
+          <label class="edit-form-label">极简表情/文字符号</label>
+          <input type="text" class="edit-input" id="field-symbolFace" value="${this.tempFormData.symbolFace || ''}">
+        </div>
+        <div class="edit-form-group" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px">
+          <div><label class="edit-form-label">TOTAL</label><input type="text" class="edit-input" id="field-total" value="${this.tempFormData.total || '0'}"></div>
+          <div><label class="edit-form-label">PINNED</label><input type="text" class="edit-input" id="field-pinned" value="${this.tempFormData.pinned || '0'}"></div>
+          <div><label class="edit-form-label">PENDING</label><input type="text" class="edit-input" id="field-pending" value="${this.tempFormData.pending || '0'}"></div>
         </div>
       `;
     }
@@ -398,6 +618,8 @@ class WidgetManager {
     if (this.currentEditingId === 'p1') await this.renderWidgetP1();
     if (this.currentEditingId === 'p2') await this.renderWidgetP2();
     if (this.currentEditingId === 'p3') await this.renderWidgetP3();
+    if (this.currentEditingId === 'p2_p1') await this.renderPage2WidgetP1();
+    if (this.currentEditingId === 'p2_p2') await this.renderPage2WidgetP2();
 
     this.closeModal();
     this.showToast('保存成功，已持久化');

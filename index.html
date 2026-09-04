@@ -27,7 +27,6 @@
         <span class="status-time" id="status-time">12:00</span>
       </div>
       <div class="status-right">
-        <!-- 信号阶梯条 -->
         <span class="status-indicator">
           <svg width="17" height="11" viewBox="0 0 17 11" fill="none">
             <rect x="0" y="8" width="2.5" height="3" rx="0.8" fill="#333"/>
@@ -36,7 +35,6 @@
             <rect x="13.5" y="0" width="2.5" height="11" rx="0.8" fill="#333"/>
           </svg>
         </span>
-        <!-- WiFi 图标 -->
         <span class="status-indicator">
           <svg width="15" height="12" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.3" stroke-linecap="round">
             <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
@@ -45,9 +43,8 @@
             <line x1="12" y1="20" x2="12.01" y2="20"/>
           </svg>
         </span>
-        <!-- 电池图标 -->
         <span class="status-indicator">
-          <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="#333" stroke-width="1.8" rx="3">
+          <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="#333" stroke-width="1.8">
             <rect x="1" y="1" width="19" height="10" rx="3"/>
             <path d="M22 4.5v3" stroke-linecap="round"/>
             <rect x="3" y="3" width="13" height="6" rx="1.5" fill="#333"/>
@@ -56,25 +53,22 @@
       </div>
     </header>
 
-    <!-- 主滑动视窗 (共两页) -->
+    <!-- 主滑动视窗 (主屏幕共两页) -->
     <main class="screens-slider" id="screens-slider">
       
-      <!-- 第一页: 顶部小组件 P1 + 中部并排小组件 P2, P3 + 下方 6 个 APP -->
+      <!-- ================= 第一页 ================= -->
+      <!-- 顶部小组件 P1 + 中部双列小组件 P2, P3 + 下方 8 个 APP (4列 x 2行) -->
       <section class="screen-page" id="page-1">
         <div class="page-one-content">
           
           <div class="widgets-top-section">
-            <!-- 顶部小组件 P1 挂载区 -->
             <div id="widget-p1-mount"></div>
-
-            <!-- 顶部下方左右双列小组件 P2 和 P3 挂载区 -->
             <div class="widgets-mid-row">
               <div id="widget-p2-mount"></div>
               <div id="widget-p3-mount"></div>
             </div>
           </div>
 
-          <!-- 第一页下方侧 6 个 APP: chat-记忆世界-相册-日记-世界书-老福特 -->
           <div class="page-apps-section">
             <div class="page-apps-grid" id="main-apps-grid"></div>
           </div>
@@ -82,10 +76,22 @@
         </div>
       </section>
 
-      <!-- 第二页: APP 列表 (视频、恋人之家、闲鱼、美团、你懂得、查手机) -->
+      <!-- ================= 第二页 ================= -->
+      <!-- 顶部小组件 P1 (Story Mode) -->
+      <!-- 中部双栏：左侧 2x2 四个APP (视频-恋人之家-闲鱼-美团，无外框) + 右侧小组件 P2 (Memory) -->
+      <!-- 下方无冗余APP，纯粹呼吸留白 -->
       <section class="screen-page" id="page-2">
         <div class="page-two-content">
-          <div class="page-standard-grid" id="page-two-apps-grid"></div>
+          
+          <!-- 顶部小组件 P1 -->
+          <div id="page2-widget-p1-mount"></div>
+
+          <!-- 中部并排：左边 2x2 四个 APP + 右边小组件 P2 -->
+          <div class="page-two-mid-split">
+            <div class="mid-left-apps-grid" id="page2-mid-left-apps"></div>
+            <div class="mid-right-widget-container" id="page2-widget-p2-mount"></div>
+          </div>
+
         </div>
       </section>
 
@@ -102,7 +108,7 @@
 
   </div>
 
-  <!-- 小组件自定义编辑抽屉 Modal (全透明遮罩 + 毛玻璃底部弹窗) -->
+  <!-- 小组件自定义编辑抽屉 Modal -->
   <div class="modal-overlay" id="edit-modal">
     <div class="modal-sheet">
       <div class="modal-header">

@@ -1,5 +1,6 @@
 /* ==========================================================================
-   widgets.css - 纯正高级白灰 INS 风小组件样式 (P1, P2, P3)
+   widgets.css - 纯正高级白灰 INS 风小组件样式
+   包含 第一页 (P1, P2, P3) 与 第二页 (P1 Story Mode, P2 Memory)
    ========================================================================== */
 
 .phone-widget-card {
@@ -21,7 +22,6 @@
   transform: scale(0.985);
 }
 
-/* 编辑小提示微标点 */
 .widget-edit-hint {
   position: absolute;
   top: 10px;
@@ -44,27 +44,28 @@
   opacity: 0.9;
 }
 
-/* --------------------------------------------------------------------------
-   P1 小组件：顶部宽幅人物卡片 (Profile & Story Card)
-   参考图1：纯黑白动漫/画报质感 + 回形针装饰 + 侧边磨砂圆形按钮组 + 底部标签与介绍
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   第一页组件样式
+   ========================================================================== */
+
+/* P1 顶部宽幅画报人物卡片 */
 .widget-p1 {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 12px 14px 14px 14px;
+  padding: 10px 12px 12px 12px;
 }
 
 .widget-p1-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .widget-p1-title-script {
   font-family: 'CatFont', 'Georgia', serif;
-  font-size: 18px;
+  font-size: 16px;
   font-style: italic;
   font-weight: 500;
   color: #1a1a1a;
@@ -74,8 +75,8 @@
 .widget-p1-banner {
   position: relative;
   width: 100%;
-  height: 180px;
-  border-radius: 18px;
+  height: 165px;
+  border-radius: 16px;
   overflow: hidden;
   background-color: #E8EAE8;
 }
@@ -87,32 +88,30 @@
   filter: grayscale(100%) contrast(108%);
 }
 
-/* 回形针别针装饰 */
 .widget-p1-clip {
   position: absolute;
   top: -2px;
   left: 16px;
-  width: 32px;
-  height: 38px;
+  width: 30px;
+  height: 36px;
   z-index: 5;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
 
-/* 右侧悬浮功能圆钮 (3个 INS 风半透明按钮) */
 .widget-p1-floating-actions {
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   z-index: 6;
 }
 
 .widget-p1-action-btn {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
@@ -131,33 +130,32 @@
 }
 
 .widget-p1-action-svg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   stroke: #222222;
   fill: none;
 }
 
-/* 左下角磨砂玻璃贴纸气泡 */
 .widget-p1-sticker {
   position: absolute;
-  left: 12px;
-  bottom: 12px;
+  left: 10px;
+  bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 5px 12px 5px 6px;
+  gap: 7px;
+  padding: 4px 10px 4px 5px;
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
+  border-radius: 18px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   z-index: 6;
 }
 
 .widget-p1-avatar {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid #ffffff;
@@ -165,22 +163,21 @@
 }
 
 .widget-p1-quote {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 500;
   color: #111111;
   letter-spacing: -0.2px;
 }
 
-/* P1 底部人物名称、标签组与简介 */
 .widget-p1-info {
-  margin-top: 10px;
+  margin-top: 8px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .widget-p1-name {
-  font-size: 18px;
+  font-size: 16.5px;
   font-weight: 700;
   color: #111111;
   font-family: 'CatFont', 'Georgia', serif;
@@ -190,34 +187,31 @@
 .widget-p1-tags {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .widget-p1-tag {
-  font-size: 11px;
+  font-size: 10.5px;
   color: #555555;
   font-weight: 500;
   letter-spacing: -0.1px;
 }
 
 .widget-p1-bio {
-  font-size: 11.5px;
+  font-size: 11px;
   color: #666666;
-  line-height: 1.45;
+  line-height: 1.4;
   margin-top: 2px;
   font-family: -apple-system, sans-serif;
   letter-spacing: -0.1px;
 }
 
-/* --------------------------------------------------------------------------
-   P2 小组件：咖啡生活卡片 (Coffee & Plog Card)
-   参考图2：顶部搜索条胶囊 + 左侧黑白冷萃方形图 + 右侧法式衬线体排版与质感字符
-   -------------------------------------------------------------------------- */
+/* 第一页 P2 咖啡胶囊卡片 */
 .widget-p2 {
   display: flex;
   flex-direction: column;
-  padding: 10px 10px 12px 10px;
+  padding: 9px 9px 10px 9px;
   height: 100%;
 }
 
@@ -226,16 +220,16 @@
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  padding: 4px 8px;
+  padding: 4px 7px;
   background: #F4F5F4;
   border: 1px solid #E2E4E2;
   border-radius: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
 .widget-p2-arrow-icon {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   stroke: #555555;
 }
 
@@ -246,13 +240,13 @@
 }
 
 .widget-p2-search-icon {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   stroke: #666;
 }
 
 .widget-p2-search-text {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   color: #777777;
   letter-spacing: 0.5px;
@@ -260,15 +254,15 @@
 
 .widget-p2-content-split {
   display: grid;
-  grid-template-columns: 78px 1fr;
+  grid-template-columns: 72px 1fr;
   gap: 8px;
   align-items: center;
 }
 
 .widget-p2-image-wrap {
-  width: 78px;
-  height: 96px;
-  border-radius: 14px;
+  width: 72px;
+  height: 90px;
+  border-radius: 13px;
   overflow: hidden;
   background: #E8EAE8;
 }
@@ -284,7 +278,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 96px;
+  height: 90px;
   padding: 2px 0;
 }
 
@@ -295,22 +289,22 @@
 }
 
 .widget-p2-svg-symbol {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   stroke: #222;
   fill: none;
 }
 
 .widget-p2-line2 {
   font-family: 'CatFont', 'Baskerville', 'Georgia', serif;
-  font-size: 11.5px;
+  font-size: 11px;
   font-style: italic;
   font-weight: 600;
   color: #222222;
 }
 
 .widget-p2-line3 {
-  font-size: 10.5px;
+  font-size: 10px;
   color: #555555;
   font-weight: 500;
   display: flex;
@@ -319,35 +313,32 @@
 }
 
 .widget-p2-play-icon {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   fill: #333;
 }
 
 .widget-p2-line4 {
-  font-size: 11px;
+  font-size: 10.5px;
   color: #444444;
   font-weight: 600;
   letter-spacing: 0.2px;
 }
 
-/* --------------------------------------------------------------------------
-   P3 小组件：日历与随笔卡片 (Calendar & Record Card)
-   参考图3：上半段纯净黑白居室照片 + 叠印极简月份大标题；下半段周历横排；底部胶囊随笔条
-   -------------------------------------------------------------------------- */
+/* 第一页 P3 日历随笔卡片 */
 .widget-p3 {
   display: flex;
   flex-direction: column;
-  padding: 10px 10px 10px 10px;
-  gap: 8px;
+  padding: 9px 9px 9px 9px;
+  gap: 7px;
   height: 100%;
 }
 
 .widget-p3-top-photo {
   position: relative;
   width: 100%;
-  height: 80px;
-  border-radius: 14px;
+  height: 74px;
+  border-radius: 13px;
   overflow: hidden;
   background: #E8EAE8;
 }
@@ -362,7 +353,7 @@
 .widget-p3-photo-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.35));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -374,7 +365,7 @@
 
 .widget-p3-overlay-month {
   font-family: 'CatFont', 'Georgia', serif;
-  font-size: 13px;
+  font-size: 12px;
   font-style: italic;
   letter-spacing: 1px;
   opacity: 0.95;
@@ -382,21 +373,20 @@
 }
 
 .widget-p3-overlay-quote {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.3px;
   text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   margin-top: 1px;
 }
 
-/* 一周日期迷你列表 */
 .widget-p3-cal-strip {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3px 4px;
+  padding: 2px 3px;
   background: #F8F9F8;
-  border-radius: 10px;
+  border-radius: 9px;
   border: 1px solid #ECECEC;
 }
 
@@ -404,17 +394,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 1px;
 }
 
 .widget-p3-cal-w {
-  font-size: 8.5px;
+  font-size: 8px;
   color: #888888;
   font-weight: 600;
 }
 
 .widget-p3-cal-d {
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 600;
   color: #666666;
 }
@@ -424,21 +414,20 @@
   font-weight: 800;
 }
 
-/* 底部胶囊微胶囊便签条 */
 .widget-p3-bottom-pill {
   background: #FFFFFF;
   border: 1px solid var(--theme-border);
-  border-radius: 20px;
-  padding: 4px 8px 4px 5px;
+  border-radius: 18px;
+  padding: 3px 7px 3px 4px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.02);
 }
 
 .widget-p3-pill-avatar {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid #E0E0E0;
@@ -453,22 +442,22 @@
 }
 
 .widget-p3-pill-date {
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
   color: #333333;
   letter-spacing: 0.3px;
 }
 
 .widget-p3-pill-text {
-  font-size: 9px;
+  font-size: 8.5px;
   color: #666666;
   font-family: 'DiaryFont', sans-serif;
   letter-spacing: 0.1px;
 }
 
 .widget-p3-pill-menu {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -481,4 +470,290 @@
   height: 2px;
   background: #000;
   border-radius: 50%;
+}
+
+/* ==========================================================================
+   第二页组件样式 (Story Mode P1 + Memory P2)
+   ========================================================================== */
+
+/* 第二页顶部小组件 P1 (Story Mode) */
+.widget-p2-p1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 9px 12px 10px 12px;
+  gap: 8px;
+}
+
+.p2-p1-top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p2-p1-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 3px 9px;
+  background: #EEEEEE;
+  border-radius: 12px;
+  color: #444;
+}
+
+.p2-p1-center-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: 0.3px;
+}
+
+.p2-p1-user-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.p2-p1-user-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p2-p1-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #D0D0D0;
+  background: #EAEAEA;
+}
+
+.p2-p1-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.p2-p1-username {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #222;
+}
+
+.p2-p1-user-sub {
+  font-size: 9.5px;
+  color: #888;
+}
+
+.p2-p1-user-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  color: #555;
+  font-weight: 600;
+}
+
+/* 4 张多图网格 */
+.p2-p1-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.p2-p1-photo-item {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #E8EAE8;
+  border: 1px solid #E5E7E5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p2-p1-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.p2-p1-photo-plus {
+  color: #999;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+/* 随笔与黑金底栏 */
+.p2-p1-quote-card {
+  background: #F8F9F8;
+  border: 1px solid #ECECEC;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.p2-p1-quote-body {
+  padding: 7px 10px;
+  font-size: 10.5px;
+  color: #444;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.p2-p1-quote-footer {
+  background: #1A1A1A;
+  color: #FFFFFF;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9.5px;
+  letter-spacing: 0.2px;
+}
+
+.p2-p1-footer-action {
+  background: #111111;
+  color: #FFFFFF;
+  border-radius: 18px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* 第二页中部右侧小组件 P2 (Memory 叠卡) */
+.widget-p2-p2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 10px;
+}
+
+.p2-p2-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p2-p2-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+}
+
+.p2-p2-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* 叠卡轮播视觉 */
+.p2-p2-cards-stage {
+  position: relative;
+  width: 100%;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3px 0;
+}
+
+.p2-p2-card-bg-left, .p2-p2-card-bg-right {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  background: #F0F2F0;
+  border: 1px solid #DCDCDC;
+  opacity: 0.6;
+  overflow: hidden;
+}
+
+.p2-p2-card-bg-left {
+  left: 2px;
+  transform: scale(0.85);
+}
+
+.p2-p2-card-bg-right {
+  right: 2px;
+  transform: scale(0.85);
+}
+
+.p2-p2-card-center {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: #E8EAE8;
+  border: 1px solid #D7D7D7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.p2-p2-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.p2-p2-info-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.p2-p2-memories-count {
+  font-size: 8.5px;
+  color: #999;
+}
+
+.p2-p2-symbol-face {
+  font-size: 10px;
+  color: #555;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* 底部数据面板 0 / 0 / 0 */
+.p2-p2-data-board {
+  background: #F7F8F7;
+  border: 1px solid #ECECEC;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 5px 0;
+  text-align: center;
+}
+
+.p2-p2-data-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.p2-p2-data-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+}
+
+.p2-p2-data-label {
+  font-size: 7.5px;
+  font-weight: 600;
+  color: #888;
+  letter-spacing: 0.3px;
 }
