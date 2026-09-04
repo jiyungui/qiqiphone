@@ -1,7 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="128" fill="#F1F2F1"/>
-  <rect x="32" y="32" width="448" height="448" rx="100" fill="#FFFFFF" stroke="#D7D7D7" stroke-width="8"/>
-  <circle cx="256" cy="256" r="120" fill="none" stroke="#222222" stroke-width="12"/>
-  <circle cx="256" cy="256" r="40" fill="#222222"/>
-  <path d="M256 96 V136 M256 376 V416 M96 256 H136 M376 256 H416" stroke="#222222" stroke-width="12" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- 柔和微白灰渐变背景 -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7F8F7"/>
+      <stop offset="100%" stop-color="#ECEEEC"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 底板 (iOS 保存桌面会自动做外轮廓裁切，留适度安全边距) -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- 上方淡雅灰色心形 -->
+  <path d="M256,180 C242,145 200,135 175,160 C145,190 155,230 256,290 C357,230 367,190 337,160 C312,135 270,145 256,180 Z" 
+        fill="none" stroke="#C8CCC8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 两个火柴人（黑色极简INS风） -->
+  <!-- 左边小人 -->
+  <circle cx="190" cy="225" r="32" fill="#F7F8F7" stroke="#222422" stroke-width="10"/>
+  <!-- 身体 -->
+  <line x1="190" y1="257" x2="190" y2="350" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+  <!-- 外侧手 (自然垂落) -->
+  <line x1="190" y1="285" x2="152" y2="335" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+  <!-- 内侧手 (伸向中间牵手) -->
+  <line x1="190" y1="292" x2="256" y2="322" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+  <!-- 双腿 -->
+  <line x1="190" y1="350" x2="162" y2="425" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+  <line x1="190" y1="350" x2="208" y2="425" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- 右边小人 -->
+  <circle cx="322" cy="225" r="32" fill="#F7F8F7" stroke="#222422" stroke-width="10"/>
+  <!-- 身体 -->
+  <line x1="322" y1="257" x2="322" y2="350" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+  <!-- 内侧手 (牵手) -->
+  <line x1="322" y1="292" x2="256" y2="322" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+  <!-- 外侧手 (自然垂落) -->
+  <line x1="322" y1="285" x2="360" y2="335" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+  <!-- 双腿 -->
+  <line x1="322" y1="350" x2="304" y2="425" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+  <line x1="322" y1="350" x2="350" y2="425" stroke="#222422" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- 牵手紧握节点 -->
+  <circle cx="256" cy="322" r="6" fill="#222422"/>
 </svg>

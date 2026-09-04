@@ -3,6 +3,7 @@
  * 第一页组件: P1 (宽幅画报), P2 (咖啡胶囊), P3 (日历随笔)
  * 第二页组件: P1 (Story Mode 故事模式), P2 (Memory 记忆叠卡)
  * 全部支持 IndexedDB 无损高清图片持久化存储，默认浅灰，纯正白灰语录风格
+ * 高级 INS 悬浮窗配置：白灰极简质感、灰色控制按钮、无任何 Emoji
  */
 
 const LIGHT_GRAY_PLACEHOLDER = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23E8EAE8'/%3E%3Cpath d='M160 200h80M200 160v80' stroke='%23D0D4D0' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E";
@@ -394,7 +395,7 @@ class WidgetManager {
   }
 
   // ========================================================================
-  // 编辑弹窗
+  // 高级 INS 白灰悬浮窗编辑交互 (居中浮动、细致层级、纯灰按键、无Emoji)
   // ========================================================================
   async openEditDialog(widgetId) {
     this.currentEditingId = widgetId;
@@ -410,169 +411,254 @@ class WidgetManager {
 
     let fieldsHtml = '';
     if (widgetId === 'p1') {
-      this.modalTitleEl.textContent = '自定义第一页 P1 宽幅卡片';
+      this.modalTitleEl.textContent = '编辑第一页 · 画报随笔卡片';
       fieldsHtml = `
         <div class="edit-form-group">
-          <label class="edit-form-label">顶部艺术标题</label>
+          <label class="edit-form-label"><span>顶部艺术标题</span><span style="opacity:0.5">HEADER</span></label>
           <input type="text" class="edit-input" id="field-headerTitle" value="${this.tempFormData.headerTitle || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">封面海报大图 (无损存储)</label>
+          <label class="edit-form-label"><span>画报主图</span><span style="opacity:0.5">RAW IMAGE</span></label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn"><span>选择图片</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p1-img')"></label>
-            <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'img', 'prev-p1-img')">设为浅灰默认</button>
-            <img id="prev-p1-img" class="edit-file-preview" src="${this.tempFormData.img}">
+            <div class="edit-file-left">
+              <img id="prev-p1-img" class="edit-file-preview" src="${this.tempFormData.img}">
+              <span style="font-size:11px; color:#777">无损持久化原图</span>
+            </div>
+            <div class="edit-file-btn-group">
+              <label class="edit-gray-btn">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p1-img')">
+              </label>
+              <button type="button" class="edit-gray-btn secondary" onclick="widgetManager.resetToGray(event, 'img', 'prev-p1-img')">浅灰默认</button>
+            </div>
           </div>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">贴纸头像</label>
+          <label class="edit-form-label"><span>贴纸微头像</span><span style="opacity:0.5">STICKER AVATAR</span></label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn"><span>选择头像</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'stickerAvatar', 'prev-p1-avatar')"></label>
-            <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'stickerAvatar', 'prev-p1-avatar')">设为浅灰默认</button>
-            <img id="prev-p1-avatar" class="edit-file-preview" src="${this.tempFormData.stickerAvatar}">
+            <div class="edit-file-left">
+              <img id="prev-p1-avatar" class="edit-file-preview" src="${this.tempFormData.stickerAvatar}">
+              <span style="font-size:11px; color:#777">浮动圆形贴纸</span>
+            </div>
+            <div class="edit-file-btn-group">
+              <label class="edit-gray-btn">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'stickerAvatar', 'prev-p1-avatar')">
+              </label>
+              <button type="button" class="edit-gray-btn secondary" onclick="widgetManager.resetToGray(event, 'stickerAvatar', 'prev-p1-avatar')">浅灰默认</button>
+            </div>
           </div>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">贴纸微言</label>
+          <label class="edit-form-label"><span>贴纸简述</span><span style="opacity:0.5">QUOTE</span></label>
           <input type="text" class="edit-input" id="field-stickerQuote" value="${this.tempFormData.stickerQuote || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">名字 / 署名</label>
+          <label class="edit-form-label"><span>落款署名</span><span style="opacity:0.5">NAME</span></label>
           <input type="text" class="edit-input" id="field-name" value="${this.tempFormData.name || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">标签组 (用 · 分割)</label>
+          <label class="edit-form-label"><span>标签组 (用 · 分割)</span><span style="opacity:0.5">TAGS</span></label>
           <input type="text" class="edit-input" id="field-tags" value="${this.tempFormData.tags || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">随笔文案 / 语录</label>
+          <label class="edit-form-label"><span>语录随笔</span><span style="opacity:0.5">BIO</span></label>
           <textarea class="edit-textarea" id="field-bio">${this.tempFormData.bio || ''}</textarea>
         </div>
       `;
     } else if (widgetId === 'p2') {
-      this.modalTitleEl.textContent = '自定义第一页 P2 胶囊卡片';
+      this.modalTitleEl.textContent = '编辑第一页 · 胶囊生活卡片';
       fieldsHtml = `
         <div class="edit-form-group">
-          <label class="edit-form-label">顶部胶囊文案</label>
+          <label class="edit-form-label"><span>胶囊文案</span><span style="opacity:0.5">CAPSULE</span></label>
           <input type="text" class="edit-input" id="field-searchWord" value="${this.tempFormData.searchWord || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">侧边照片 (无损存储)</label>
+          <label class="edit-form-label"><span>侧边照片</span><span style="opacity:0.5">PHOTO</span></label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn"><span>选择图片</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p2-img')"></label>
-            <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'img', 'prev-p2-img')">设为浅灰默认</button>
-            <img id="prev-p2-img" class="edit-file-preview" src="${this.tempFormData.img}">
+            <div class="edit-file-left">
+              <img id="prev-p2-img" class="edit-file-preview" src="${this.tempFormData.img}">
+              <span style="font-size:11px; color:#777">无损持久化原图</span>
+            </div>
+            <div class="edit-file-btn-group">
+              <label class="edit-gray-btn">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p2-img')">
+              </label>
+              <button type="button" class="edit-gray-btn secondary" onclick="widgetManager.resetToGray(event, 'img', 'prev-p2-img')">浅灰默认</button>
+            </div>
           </div>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">衬线字符语录</label>
+          <label class="edit-form-label"><span>衬线短句</span><span style="opacity:0.5">LINE 2</span></label>
           <input type="text" class="edit-input" id="field-line2" value="${this.tempFormData.line2 || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">音律文案</label>
+          <label class="edit-form-label"><span>播放器文案</span><span style="opacity:0.5">LINE 3</span></label>
           <input type="text" class="edit-input" id="field-line3" value="${this.tempFormData.line3 || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">随笔注记</label>
+          <label class="edit-form-label"><span>随笔注记</span><span style="opacity:0.5">LINE 4</span></label>
           <input type="text" class="edit-input" id="field-line4" value="${this.tempFormData.line4 || ''}">
         </div>
       `;
     } else if (widgetId === 'p3') {
-      this.modalTitleEl.textContent = '自定义第一页 P3 日历随笔卡片';
+      this.modalTitleEl.textContent = '编辑第一页 · 日历随笔卡片';
       fieldsHtml = `
         <div class="edit-form-group">
-          <label class="edit-form-label">背景大图</label>
+          <label class="edit-form-label"><span>背景大图</span><span style="opacity:0.5">BACKGROUND</span></label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn"><span>选择图片</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p3-img')"></label>
-            <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'img', 'prev-p3-img')">设为浅灰默认</button>
-            <img id="prev-p3-img" class="edit-file-preview" src="${this.tempFormData.img}">
+            <div class="edit-file-left">
+              <img id="prev-p3-img" class="edit-file-preview" src="${this.tempFormData.img}">
+              <span style="font-size:11px; color:#777">无损持久化原图</span>
+            </div>
+            <div class="edit-file-btn-group">
+              <label class="edit-gray-btn">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img', 'prev-p3-img')">
+              </label>
+              <button type="button" class="edit-gray-btn secondary" onclick="widgetManager.resetToGray(event, 'img', 'prev-p3-img')">浅灰默认</button>
+            </div>
           </div>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">月份衬线标题</label>
+          <label class="edit-form-label"><span>月份艺术标题</span><span style="opacity:0.5">MONTH</span></label>
           <input type="text" class="edit-input" id="field-monthTitle" value="${this.tempFormData.monthTitle || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">主标语录</label>
+          <label class="edit-form-label"><span>标语语录</span><span style="opacity:0.5">SLOGAN</span></label>
           <input type="text" class="edit-input" id="field-quoteTitle" value="${this.tempFormData.quoteTitle || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">便签头像</label>
+          <label class="edit-form-label"><span>便签微头像</span><span style="opacity:0.5">AVATAR</span></label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn"><span>选择头像</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'pillAvatar', 'prev-p3-avatar')"></label>
-            <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'pillAvatar', 'prev-p3-avatar')">设为浅灰默认</button>
-            <img id="prev-p3-avatar" class="edit-file-preview" src="${this.tempFormData.pillAvatar}">
+            <div class="edit-file-left">
+              <img id="prev-p3-avatar" class="edit-file-preview" src="${this.tempFormData.pillAvatar}">
+              <span style="font-size:11px; color:#777">便签左侧头像</span>
+            </div>
+            <div class="edit-file-btn-group">
+              <label class="edit-gray-btn">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'pillAvatar', 'prev-p3-avatar')">
+              </label>
+              <button type="button" class="edit-gray-btn secondary" onclick="widgetManager.resetToGray(event, 'pillAvatar', 'prev-p3-avatar')">浅灰默认</button>
+            </div>
           </div>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">便签心情语录</label>
+          <label class="edit-form-label"><span>便签心情随笔</span><span style="opacity:0.5">MEMO NOTE</span></label>
           <input type="text" class="edit-input" id="field-pillText" value="${this.tempFormData.pillText || ''}">
         </div>
       `;
     } else if (widgetId === 'p2_p1') {
-      this.modalTitleEl.textContent = '自定义第二页 P1 故事模式卡片';
+      this.modalTitleEl.textContent = '编辑第二页 · 故事模式卡片';
       fieldsHtml = `
         <div class="edit-form-group">
-          <label class="edit-form-label">用户昵称</label>
+          <label class="edit-form-label"><span>用户昵称</span><span style="opacity:0.5">USERNAME</span></label>
           <input type="text" class="edit-input" id="field-userName" value="${this.tempFormData.userName || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">签名微言</label>
+          <label class="edit-form-label"><span>签名短语</span><span style="opacity:0.5">SUBTITLE</span></label>
           <input type="text" class="edit-input" id="field-userBio" value="${this.tempFormData.userBio || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">用户头像</label>
+          <label class="edit-form-label"><span>用户头像</span><span style="opacity:0.5">AVATAR</span></label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn"><span>选择头像</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'avatar', 'prev-p2p1-avatar')"></label>
-            <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'avatar', 'prev-p2p1-avatar')">设为浅灰默认</button>
-            <img id="prev-p2p1-avatar" class="edit-file-preview" src="${this.tempFormData.avatar}">
+            <div class="edit-file-left">
+              <img id="prev-p2p1-avatar" class="edit-file-preview" src="${this.tempFormData.avatar}">
+              <span style="font-size:11px; color:#777">无损持久化原图</span>
+            </div>
+            <div class="edit-file-btn-group">
+              <label class="edit-gray-btn">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'avatar', 'prev-p2p1-avatar')">
+              </label>
+              <button type="button" class="edit-gray-btn secondary" onclick="widgetManager.resetToGray(event, 'avatar', 'prev-p2p1-avatar')">浅灰默认</button>
+            </div>
           </div>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">随笔文案语录</label>
+          <label class="edit-form-label"><span>随笔语录文案</span><span style="opacity:0.5">QUOTE BODY</span></label>
           <textarea class="edit-textarea" id="field-quoteText">${this.tempFormData.quoteText || ''}</textarea>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">四张生活照片 (可分别更换)</label>
-          <div style="display:flex; gap:8px; flex-wrap:wrap">
-            <label class="edit-file-btn">图1<input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img1', 'prev-p2p1-1')"></label>
-            <img id="prev-p2p1-1" class="edit-file-preview" src="${this.tempFormData.img1}">
-            <label class="edit-file-btn">图2<input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img2', 'prev-p2p1-2')"></label>
-            <img id="prev-p2p1-2" class="edit-file-preview" src="${this.tempFormData.img2}">
-            <label class="edit-file-btn">图3<input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img3', 'prev-p2p1-3')"></label>
-            <img id="prev-p2p1-3" class="edit-file-preview" src="${this.tempFormData.img3}">
-            <label class="edit-file-btn">图4<input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img4', 'prev-p2p1-4')"></label>
-            <img id="prev-p2p1-4" class="edit-file-preview" src="${this.tempFormData.img4}">
+          <label class="edit-form-label"><span>四张生活照展示 (独立更换)</span><span style="opacity:0.5">PHOTOS</span></label>
+          <div class="multi-photo-grid-box">
+            <div class="multi-photo-item">
+              <img id="prev-p2p1-1" src="${this.tempFormData.img1}">
+              <label class="edit-gray-btn" style="padding:3px 6px; font-size:10px">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img1', 'prev-p2p1-1')">
+              </label>
+            </div>
+            <div class="multi-photo-item">
+              <img id="prev-p2p1-2" src="${this.tempFormData.img2}">
+              <label class="edit-gray-btn" style="padding:3px 6px; font-size:10px">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img2', 'prev-p2p1-2')">
+              </label>
+            </div>
+            <div class="multi-photo-item">
+              <img id="prev-p2p1-3" src="${this.tempFormData.img3}">
+              <label class="edit-gray-btn" style="padding:3px 6px; font-size:10px">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img3', 'prev-p2p1-3')">
+              </label>
+            </div>
+            <div class="multi-photo-item">
+              <img id="prev-p2p1-4" src="${this.tempFormData.img4}">
+              <label class="edit-gray-btn" style="padding:3px 6px; font-size:10px">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'img4', 'prev-p2p1-4')">
+              </label>
+            </div>
           </div>
         </div>
       `;
     } else if (widgetId === 'p2_p2') {
-      this.modalTitleEl.textContent = '自定义第二页 P2 记忆卡片';
+      this.modalTitleEl.textContent = '编辑第二页 · 记忆卡片';
       fieldsHtml = `
         <div class="edit-form-group">
-          <label class="edit-form-label">标题</label>
+          <label class="edit-form-label"><span>卡片标题</span><span style="opacity:0.5">TITLE</span></label>
           <input type="text" class="edit-input" id="field-title" value="${this.tempFormData.title || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">中心主卡照片 (无损存储)</label>
+          <label class="edit-form-label"><span>中心主照</span><span style="opacity:0.5">CENTER PHOTO</span></label>
           <div class="edit-file-wrapper">
-            <label class="edit-file-btn"><span>选择图片</span><input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'avatarCenter', 'prev-p2p2-c')"></label>
-            <button type="button" class="edit-file-btn" style="background:#555" onclick="widgetManager.resetToGray(event, 'avatarCenter', 'prev-p2p2-c')">设为浅灰默认</button>
-            <img id="prev-p2p2-c" class="edit-file-preview" src="${this.tempFormData.avatarCenter}">
+            <div class="edit-file-left">
+              <img id="prev-p2p2-c" class="edit-file-preview" src="${this.tempFormData.avatarCenter}">
+              <span style="font-size:11px; color:#777">中心核心原图</span>
+            </div>
+            <div class="edit-file-btn-group">
+              <label class="edit-gray-btn">
+                <span>更换</span>
+                <input type="file" accept="image/*" style="display:none" onchange="widgetManager.handleFileSelect(event, 'avatarCenter', 'prev-p2p2-c')">
+              </label>
+              <button type="button" class="edit-gray-btn secondary" onclick="widgetManager.resetToGray(event, 'avatarCenter', 'prev-p2p2-c')">浅灰默认</button>
+            </div>
           </div>
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">统计说明文案</label>
+          <label class="edit-form-label"><span>统计说明文案</span><span style="opacity:0.5">MEMORIES COUNT</span></label>
           <input type="text" class="edit-input" id="field-memoriesCount" value="${this.tempFormData.memoriesCount || ''}">
         </div>
         <div class="edit-form-group">
-          <label class="edit-form-label">极简表情/文字符号</label>
+          <label class="edit-form-label"><span>字符符号</span><span style="opacity:0.5">ASCII FACE</span></label>
           <input type="text" class="edit-input" id="field-symbolFace" value="${this.tempFormData.symbolFace || ''}">
         </div>
         <div class="edit-form-group" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px">
-          <div><label class="edit-form-label">TOTAL</label><input type="text" class="edit-input" id="field-total" value="${this.tempFormData.total || '0'}"></div>
-          <div><label class="edit-form-label">PINNED</label><input type="text" class="edit-input" id="field-pinned" value="${this.tempFormData.pinned || '0'}"></div>
-          <div><label class="edit-form-label">PENDING</label><input type="text" class="edit-input" id="field-pending" value="${this.tempFormData.pending || '0'}"></div>
+          <div>
+            <label class="edit-form-label">TOTAL</label>
+            <input type="text" class="edit-input" id="field-total" value="${this.tempFormData.total || '0'}">
+          </div>
+          <div>
+            <label class="edit-form-label">PINNED</label>
+            <input type="text" class="edit-input" id="field-pinned" value="${this.tempFormData.pinned || '0'}">
+          </div>
+          <div>
+            <label class="edit-form-label">PENDING</label>
+            <input type="text" class="edit-input" id="field-pending" value="${this.tempFormData.pending || '0'}">
+          </div>
         </div>
       `;
     }
@@ -586,7 +672,7 @@ class WidgetManager {
     this.tempFormData[dataKey] = LIGHT_GRAY_PLACEHOLDER;
     const prevEl = document.getElementById(previewId);
     if (prevEl) prevEl.src = LIGHT_GRAY_PLACEHOLDER;
-    this.showToast('已设为浅灰默认图');
+    this.showToast('已设为浅灰底图');
   }
 
   handleFileSelect(event, dataKey, previewId) {
@@ -599,7 +685,7 @@ class WidgetManager {
       this.tempFormData[dataKey] = fullResDataUrl;
       const prevEl = document.getElementById(previewId);
       if (prevEl) prevEl.src = fullResDataUrl;
-      this.showToast('原图载入成功');
+      this.showToast('原图载入完成');
     };
     reader.readAsDataURL(file);
   }
@@ -631,8 +717,15 @@ class WidgetManager {
   }
 
   bindModalEvents() {
-    document.getElementById('modal-close-btn').addEventListener('click', () => this.closeModal());
-    document.getElementById('modal-save-btn').addEventListener('click', () => this.saveCurrentEdit());
+    const closeBtn = document.getElementById('modal-close-btn');
+    if (closeBtn) closeBtn.addEventListener('click', () => this.closeModal());
+    
+    const cancelBtn = document.getElementById('modal-cancel-btn');
+    if (cancelBtn) cancelBtn.addEventListener('click', () => this.closeModal());
+
+    const saveBtn = document.getElementById('modal-save-btn');
+    if (saveBtn) saveBtn.addEventListener('click', () => this.saveCurrentEdit());
+
     this.modalEl.addEventListener('click', (e) => {
       if (e.target === this.modalEl) this.closeModal();
     });

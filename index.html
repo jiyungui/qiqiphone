@@ -5,13 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>祁祁phone</title>
   
-  <!-- PWA & 移动端全屏桌面安装支持 -->
+  <!-- PWA & 移动端桌面图标与全屏独立运行支持 -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#F1F2F1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="祁祁phone">
-  <link rel="apple-touch-icon" href="assets/icons/phone-icon.svg">
+  
+  <!-- iOS Safari 添加主屏幕专属高清图标 (火柴人牵手) -->
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/phone-icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/phone-icon.svg">
   
   <!-- 模块化样式表 -->
   <link rel="stylesheet" href="css/main.css">
@@ -79,7 +84,6 @@
       <!-- ================= 第二页 ================= -->
       <!-- 顶部小组件 P1 (Story Mode) -->
       <!-- 中部双栏：左侧 2x2 四个APP (视频-恋人之家-闲鱼-美团，无外框) + 右侧小组件 P2 (Memory) -->
-      <!-- 下方无冗余APP，纯粹呼吸留白 -->
       <section class="screen-page" id="page-2">
         <div class="page-two-content">
           
@@ -108,22 +112,30 @@
 
   </div>
 
-  <!-- 小组件自定义编辑抽屉 Modal -->
+  <!-- 全新高级 INS 白灰悬浮窗 Modal -->
   <div class="modal-overlay" id="edit-modal">
-    <div class="modal-sheet">
+    <div class="modal-floating-card">
       <div class="modal-header">
-        <h3 class="modal-title" id="modal-title">自定义组件</h3>
-        <button class="modal-close-btn" id="modal-close-btn">✕</button>
+        <div class="modal-title-wrap">
+          <span class="modal-title" id="modal-title">自定义组件</span>
+          <span class="modal-sub-tag">WIDGET CONFIG</span>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" title="关闭">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
-      <div id="modal-body-fields"></div>
-      <button class="edit-save-btn" id="modal-save-btn">保存并更新到手机</button>
+      <div class="modal-body" id="modal-body-fields"></div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="modal-cancel-btn">取消</button>
+        <button class="btn-save" id="modal-save-btn">保存更改</button>
+      </div>
     </div>
   </div>
 
   <!-- 极简轻量提示 Toast -->
   <div class="toast-msg" id="toast"></div>
 
-  <!-- 核心逻辑脚本 (区分文件单独管理) -->
+  <!-- 核心逻辑脚本 -->
   <script src="js/db.js"></script>
   <script src="js/apps.js"></script>
   <script src="js/widgets.js"></script>

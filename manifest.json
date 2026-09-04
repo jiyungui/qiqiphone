@@ -1,18 +1,27 @@
 {
-  "name": "祁祁phone",
   "short_name": "祁祁phone",
-  "description": "高级白灰INS风小手机系统",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#F1F2F1",
-  "theme_color": "#F1F2F1",
-  "orientation": "portrait",
+  "name": "祁祁phone",
   "icons": [
     {
+      "src": "assets/icons/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/icons/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
       "src": "assets/icons/phone-icon.svg",
-      "sizes": "192x192 512x512",
       "type": "image/svg+xml",
+      "sizes": "any",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "start_url": "./index.html",
+  "background_color": "#F1F2F1",
+  "theme_color": "#F1F2F1",
+  "display": "standalone",
+  "orientation": "portrait"
 }

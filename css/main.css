@@ -21,12 +21,12 @@
   --text-secondary: #777777;
   --text-light: #999999;
   --card-bg: #FFFFFF;
-  --dock-bg: rgba(255, 255, 255, 0.75);
+  --dock-bg: rgba(255, 255, 255, 0.78);
   --glass-border: rgba(215, 217, 215, 0.85);
   
   --radius-card: 22px;
-  --radius-app: 16px;
-  --radius-dock: 32px;
+  --radius-app: 15px;
+  --radius-dock: 26px;
   
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
@@ -137,7 +137,7 @@ html, body {
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  padding: 4px 16px 6px 16px;
+  padding: 2px 16px 4px 16px;
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -146,13 +146,14 @@ html, body {
   display: none;
 }
 
-/* 第一页内容自适应弹性容器 */
+/* 第一页内容自适应容器：紧凑自然，避免8个APP太靠下方 */
 .page-one-content {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   flex: 1;
-  justify-content: space-between;
+  justify-content: flex-start;
+  padding-top: 2px;
 }
 
 /* 顶部与中部小组件容器 */
@@ -171,27 +172,26 @@ html, body {
   width: 100%;
 }
 
-/* 第一页下方应用网格: 8 个 APP (4列 x 2行与第二页网格规范一致) */
+/* 第一页下方应用网格: 8 个 APP (4列 x 2行，与组件自然衔接) */
 .page-apps-section {
   width: 100%;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: 4px;
 }
 
 .page-apps-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px 6px;
+  gap: 11px 6px;
   align-items: center;
   justify-items: center;
-  padding: 4px 2px;
+  padding: 2px 0;
 }
 
 /* ==========================================================================
    第二页特殊错落排版布局
    顶部：P1宽幅小组件 (Story Mode)
    中部：左侧 2x2 四个APP (视频-美团，无背后框) + 右侧 P2小组件 (Memory)
-   下方：干净留白，无冗余多余APP
+   下方：干净留白
    ========================================================================== */
 .page-two-content {
   display: flex;
@@ -199,6 +199,7 @@ html, body {
   gap: 12px;
   flex: 1;
   justify-content: flex-start;
+  padding-top: 2px;
 }
 
 /* 第二页中部双栏：左边 2x2 APP，右边小组件 P2 */
@@ -210,7 +211,7 @@ html, body {
   align-items: center;
 }
 
-/* 左侧 4 个 APP (横排俩竖排俩 2x2，已彻底去除背后多余灰色虚线边框) */
+/* 左侧 4 个 APP (横排俩竖排俩 2x2，无背景框) */
 .mid-left-apps-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -230,7 +231,7 @@ html, body {
   display: flex;
 }
 
-/* 应用图标设计 (纯白/灰质感，无Emoji) */
+/* 应用图标通用规范 (统一尺寸 50px，严格一致) */
 .app-item {
   display: flex;
   flex-direction: column;
@@ -246,8 +247,8 @@ html, body {
 }
 
 .app-icon {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: var(--radius-app);
   background: var(--card-bg);
   border: 1px solid var(--theme-border);
@@ -273,13 +274,13 @@ html, body {
 }
 
 .app-icon-svg {
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
   stroke: var(--text-main);
 }
 
 .app-label {
-  margin-top: 5px;
+  margin-top: 4px;
   font-size: 11px;
   font-weight: 600;
   color: var(--text-main);
@@ -296,8 +297,8 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  padding: 5px 0;
+  gap: 5px;
+  padding: 2px 0;
   flex-shrink: 0;
 }
 
@@ -305,29 +306,34 @@ html, body {
   width: 6px;
   height: 6px;
   border-radius: 3px;
-  background-color: #C2C2C2;
+  background-color: #C6C8C6;
   transition: all 0.25s ease;
 }
 
 .page-dot.active {
-  width: 16px;
+  width: 15px;
   background-color: #333333;
 }
 
-/* 底部 Dock 栏样式 (4 个常用应用：设置-美化-短信-频道) */
+/* ==========================================================================
+   底部 Dock 栏精细化调整
+   - 栏体更精致轻巧（不再笨重过大）
+   - 内置 APP 与主屏 APP 尺寸（50px、15px圆角）严格完全一致
+   - 贴紧底部安全区，整体向下移动
+   ========================================================================== */
 .dock-container {
-  margin: 0 16px;
-  margin-bottom: calc(var(--sab) + 6px);
+  margin: 0 18px;
+  margin-bottom: calc(var(--sab) + 2px);
   background: var(--dock-bg);
   backdrop-filter: blur(25px) saturate(180%);
   -webkit-backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-dock);
-  padding: 8px 16px;
+  padding: 6px 14px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   flex-shrink: 0;
 }
 
@@ -345,12 +351,12 @@ html, body {
 }
 
 .dock-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-app);
   background: #FFFFFF;
   border: 1px solid var(--theme-border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -368,23 +374,27 @@ html, body {
   display: none;
 }
 
-/* 弹窗及编辑抽屉 Modal 样式 */
+/* ==========================================================================
+   全新高级 INS 白灰悬浮窗 Modal
+   居中悬浮卡片 · 细致灰阶层级 · 柔和阴影 · 纯文字/SVG无Emoji
+   ========================================================================== */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(40, 42, 40, 0.32);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 16px;
 }
 
 .modal-overlay.open {
@@ -392,136 +402,280 @@ html, body {
   pointer-events: auto;
 }
 
-.modal-sheet {
+.modal-floating-card {
   width: 100%;
-  max-width: 480px;
+  max-width: 396px;
   background: #FFFFFF;
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
-  padding: 22px 20px calc(var(--sab) + 20px) 20px;
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.15);
-  transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  max-height: 85vh;
-  overflow-y: auto;
+  border: 1px solid #D6D8D6;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  max-height: 82vh;
+  transform: scale(0.95) translateY(12px);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s;
+  overflow: hidden;
 }
 
-.modal-overlay.open .modal-sheet {
-  transform: translateY(0);
+.modal-overlay.open .modal-floating-card {
+  transform: scale(1) translateY(0);
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
+  padding: 14px 18px 12px 18px;
+  border-bottom: 1px solid #EDEDED;
+  background: #FAFAFA;
+}
+
+.modal-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .modal-title {
-  font-size: 16.5px;
+  font-size: 14px;
   font-weight: 700;
-  color: #111;
+  color: #1A1A1A;
+  letter-spacing: -0.2px;
+}
+
+.modal-sub-tag {
+  font-size: 9px;
+  font-weight: 600;
+  color: #8C8E8C;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
 
 .modal-close-btn {
-  background: #F1F2F1;
-  border: none;
-  width: 32px;
-  height: 32px;
+  background: #ECEEEC;
+  border: 1px solid #DCDEDC;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 14px;
-  color: #555;
-  font-weight: 700;
+  color: #555555;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.modal-close-btn:hover {
+  background: #DFE1DF;
+  color: #111111;
+}
+
+.modal-close-btn:active {
+  transform: scale(0.92);
+}
+
+.modal-body {
+  padding: 14px 18px 10px 18px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #D6D8D6 transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #D6D8D6;
+  border-radius: 2px;
 }
 
 .edit-form-group {
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .edit-form-label {
-  display: block;
-  font-size: 11.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10.5px;
   font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 5px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: #6E706E;
+  letter-spacing: 0.4px;
 }
 
 .edit-input, .edit-textarea {
   width: 100%;
-  padding: 9px 12px;
+  padding: 8px 11px;
   border-radius: 12px;
-  border: 1px solid var(--theme-border);
-  background: #F8F9F8;
-  font-size: 13.5px;
-  color: #222;
+  border: 1px solid #D6D8D6;
+  background: #F7F8F7;
+  font-size: 12.5px;
+  color: #222222;
   outline: none;
   font-family: inherit;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
 }
 
 .edit-input:focus, .edit-textarea:focus {
-  border-color: #222;
+  border-color: #888888;
   background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
 }
 
 .edit-textarea {
-  min-height: 55px;
+  min-height: 52px;
   resize: vertical;
+  line-height: 1.45;
 }
 
+/* 上传控制栏 INS 白灰高级设计 */
 .edit-file-wrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #F8F9F8;
+  border: 1px solid #E2E4E2;
+  border-radius: 14px;
+  gap: 8px;
 }
 
-.edit-file-btn {
-  padding: 7px 14px;
+.edit-file-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-file-preview {
+  width: 38px;
+  height: 38px;
   border-radius: 10px;
-  background: #222222;
-  color: #FFFFFF;
-  font-size: 12px;
+  border: 1px solid #D0D2D0;
+  object-fit: cover;
+  background: #E8EAE8;
+  flex-shrink: 0;
+}
+
+.edit-file-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.edit-gray-btn {
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: #E8EAE8;
+  border: 1px solid #D2D4D2;
+  color: #444444;
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  border: none;
+  gap: 4px;
+  transition: all 0.15s ease;
 }
 
-.edit-file-preview {
-  width: 40px;
-  height: 40px;
+.edit-gray-btn:hover {
+  background: #DDDFDD;
+  color: #111111;
+}
+
+.edit-gray-btn:active {
+  transform: scale(0.95);
+}
+
+.edit-gray-btn.secondary {
+  background: #F1F2F1;
+  color: #666666;
+  border-color: #DBDDDB;
+}
+
+/* 多图网格上传卡片 */
+.multi-photo-grid-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.multi-photo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 4px;
+  background: #F8F9F8;
+  border: 1px solid #E2E4E2;
+  border-radius: 12px;
+}
+
+.multi-photo-item img {
+  width: 44px;
+  height: 44px;
   border-radius: 8px;
-  border: 1px solid var(--theme-border);
+  border: 1px solid #D0D2D0;
   object-fit: cover;
-  background: #eee;
+  background: #E8EAE8;
 }
 
-.edit-save-btn {
-  width: 100%;
-  padding: 13px;
-  background: #111111;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 16px;
-  font-size: 14.5px;
+/* 悬浮窗底部操作栏 */
+.modal-footer {
+  padding: 10px 18px 14px 18px;
+  background: #FAFAFA;
+  border-top: 1px solid #EDEDED;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 8px;
+}
+
+.btn-cancel {
+  padding: 10px;
+  background: #EAECEA;
+  color: #555555;
+  border: 1px solid #D4D6D4;
+  border-radius: 14px;
+  font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: opacity 0.15s;
+  transition: all 0.15s ease;
 }
 
-.edit-save-btn:active {
-  opacity: 0.85;
+.btn-cancel:hover {
+  background: #DFE1DF;
+  color: #222222;
+}
+
+.btn-cancel:active {
+  transform: scale(0.97);
+}
+
+.btn-save {
+  padding: 10px;
+  background: #505250;
+  color: #FFFFFF;
+  border: 1px solid #424442;
+  border-radius: 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.btn-save:hover {
+  background: #383A38;
+}
+
+.btn-save:active {
+  transform: scale(0.97);
 }
 
 /* Toast 提示消息 */
@@ -530,17 +684,19 @@ html, body {
   bottom: 80px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: rgba(30, 30, 30, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(45, 47, 45, 0.88);
+  backdrop-filter: blur(12px);
   color: #FFFFFF;
   padding: 7px 16px;
   border-radius: 20px;
-  font-size: 12.5px;
+  font-size: 12px;
   opacity: 0;
   pointer-events: none;
   transition: all 0.25s ease;
   z-index: 10000;
   white-space: nowrap;
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
 .toast-msg.show {
