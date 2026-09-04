@@ -21,6 +21,7 @@
   <!-- 模块化样式表 -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/widgets.css">
+  <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
 
@@ -110,6 +111,524 @@
     <!-- 底部 Dock 栏: 设置 - 美化 - 短信 - 频道 -->
     <nav class="dock-container" id="dock-mount"></nav>
 
+    <!-- ================= 美化 APP 全屏独立界面 (THEME CENTER) ================= -->
+    <div class="theme-app-view" id="theme-app-view">
+      <!-- 独立沉浸式顶部导航栏 -->
+      <header class="theme-nav-bar">
+        <div class="theme-nav-left">
+          <button class="theme-back-btn" id="theme-back-btn" title="返回">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+        </div>
+        <div class="theme-nav-center">
+          <span class="theme-nav-title" id="theme-header-title">美化</span>
+          <span class="theme-nav-subtitle" id="theme-header-sub">FLOATING CAPSULES</span>
+        </div>
+        <div class="theme-nav-right">
+          <button class="theme-reset-btn" id="theme-reset-btn">重置</button>
+        </div>
+      </header>
+
+      <!-- 主层级：高级 INS 悬浮微光胶囊列表 -->
+      <div class="theme-content-area" id="theme-main-menu">
+        
+        <!-- 顶部极简 INS 状态小标 -->
+        <div class="floating-capsule-meta">
+          <span class="meta-tag">SYSTEM PREFERENCES</span>
+          <span class="meta-count">4 CAPSULES</span>
+        </div>
+
+        <!-- 悬浮胶囊主列表 -->
+        <div class="floating-capsules-stack">
+
+          <!-- 胶囊 1: 壁纸调整 -->
+          <div class="ins-floating-capsule" data-target-section="wallpaper">
+            <div class="capsule-frost-bg"></div>
+            <div class="capsule-inner">
+              <div class="capsule-left">
+                <div class="capsule-num-pill">01</div>
+                <div class="capsule-icon-circle">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                </div>
+                <div class="capsule-typography">
+                  <div class="capsule-title-row">
+                    <span class="capsule-cn-title">壁纸调整</span>
+                    <span class="capsule-status-dot"></span>
+                  </div>
+                  <span class="capsule-en-subtitle">WALLPAPER & TEXTURE</span>
+                </div>
+              </div>
+              <div class="capsule-right">
+                <div class="capsule-arrow-disc">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 胶囊 2: 图标调整 -->
+          <div class="ins-floating-capsule" data-target-section="icons">
+            <div class="capsule-frost-bg"></div>
+            <div class="capsule-inner">
+              <div class="capsule-left">
+                <div class="capsule-num-pill">02</div>
+                <div class="capsule-icon-circle">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="2"></rect>
+                    <rect x="14" y="3" width="7" height="7" rx="2"></rect>
+                    <rect x="14" y="14" width="7" height="7" rx="2"></rect>
+                    <rect x="3" y="14" width="7" height="7" rx="2"></rect>
+                  </svg>
+                </div>
+                <div class="capsule-typography">
+                  <div class="capsule-title-row">
+                    <span class="capsule-cn-title">图标调整</span>
+                    <span class="capsule-status-dot"></span>
+                  </div>
+                  <span class="capsule-en-subtitle">ICONS & MORPHOLOGY</span>
+                </div>
+              </div>
+              <div class="capsule-right">
+                <div class="capsule-arrow-disc">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 胶囊 3: 屏幕调整 -->
+          <div class="ins-floating-capsule" data-target-section="screen">
+            <div class="capsule-frost-bg"></div>
+            <div class="capsule-inner">
+              <div class="capsule-left">
+                <div class="capsule-num-pill">03</div>
+                <div class="capsule-icon-circle">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="2" width="16" height="20" rx="4" ry="4"></rect>
+                    <circle cx="12" cy="18" r="0.9" fill="currentColor"></circle>
+                  </svg>
+                </div>
+                <div class="capsule-typography">
+                  <div class="capsule-title-row">
+                    <span class="capsule-cn-title">屏幕调整</span>
+                    <span class="capsule-status-dot"></span>
+                  </div>
+                  <span class="capsule-en-subtitle">DISPLAY & DOCK FROST</span>
+                </div>
+              </div>
+              <div class="capsule-right">
+                <div class="capsule-arrow-disc">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 胶囊 4: 小组件调整 -->
+          <div class="ins-floating-capsule" data-target-section="widgets">
+            <div class="capsule-frost-bg"></div>
+            <div class="capsule-inner">
+              <div class="capsule-left">
+                <div class="capsule-num-pill">04</div>
+                <div class="capsule-icon-circle">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="3.5"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
+                <div class="capsule-typography">
+                  <div class="capsule-title-row">
+                    <span class="capsule-cn-title">小组件调整</span>
+                    <span class="capsule-status-dot"></span>
+                  </div>
+                  <span class="capsule-en-subtitle">WIDGETS & TYPOGRAPHY</span>
+                </div>
+              </div>
+              <div class="capsule-right">
+                <div class="capsule-arrow-disc">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 底部极简 INS 印章装饰 -->
+        <div class="floating-capsule-footer-brand">
+          <span class="brand-line"></span>
+          <span class="brand-text">QI QI PHONE · AESTHETIC STUDIO</span>
+          <span class="brand-line"></span>
+        </div>
+
+      </div>
+
+      <!-- ================= 二级项目板块 1: 壁纸调整 ================= -->
+      <!-- ================= 二级项目板块 1: 壁纸调整 ================= -->
+      <div class="theme-subpage-view" id="subpage-wallpaper">
+        <div class="theme-content-area">
+          
+          <!-- 1. 顶部真实手机屏幕微缩实时预览窗口 -->
+          <div class="subpage-card-panel wp-preview-clean-panel">
+            <div class="subpage-card-title">
+              <span>屏幕效果预览 / SCREEN PREVIEW</span>
+              <span class="sub-tag">LIVE RATIO 9:16</span>
+            </div>
+            <div class="wallpaper-clean-viewport">
+              <div class="preview-wallpaper-layer" id="preview-wallpaper-layer"></div>
+              <div class="preview-frost-layer" id="preview-frost-layer"></div>
+              <div class="preview-mock-ui">
+                <div class="mock-status-bar">
+                  <span class="mock-time">09:41</span>
+                  <div class="mock-status-icons">
+                    <span class="mock-bar"></span>
+                    <span class="mock-bar"></span>
+                    <span class="mock-battery"></span>
+                  </div>
+                </div>
+                <div class="mock-widget-capsule">
+                  <span class="mock-widget-line"></span>
+                  <span class="mock-widget-sub"></span>
+                </div>
+                <div class="mock-app-grid">
+                  <span class="mock-app-dot"></span>
+                  <span class="mock-app-dot"></span>
+                  <span class="mock-app-dot"></span>
+                  <span class="mock-app-dot"></span>
+                </div>
+                <div class="mock-dock-bar">
+                  <span class="mock-dock-dot"></span>
+                  <span class="mock-dock-dot"></span>
+                  <span class="mock-dock-dot"></span>
+                  <span class="mock-dock-dot"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. 壁纸来源与上传/导入操作卡片 -->
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>壁纸来源 / IMPORT SOURCE</span>
+              <span class="sub-tag">LOCAL & URL</span>
+            </div>
+
+            <!-- 上传导入按钮组 -->
+            <div class="wallpaper-source-action-row">
+              <label class="wp-action-pill-btn" for="wp-file-input">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <span>相册 / 本地上传</span>
+                <input type="file" id="wp-file-input" accept="image/*" style="display: none;">
+              </label>
+
+              <button class="wp-action-pill-btn" id="wp-url-trigger-btn" type="button">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+                <span>网络 URL 导入</span>
+              </button>
+            </div>
+
+            <!-- URL 展开导入框 (默认折叠) -->
+            <div class="wp-url-input-wrap" id="wp-url-input-wrap" style="display: none;">
+              <input type="url" id="wp-url-field" class="wp-ins-text-input" placeholder="输入 https:// 图片直链地址...">
+              <button class="wp-url-confirm-btn" id="wp-url-confirm-btn" type="button">载入</button>
+            </div>
+          </div>
+
+          <!-- 3. 滤镜与质感微调卡片 (模糊 / 毛玻璃 / 不透明度) -->
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>滤镜与微光质感 / FILTERS & FROST</span>
+              <span class="sub-tag">TEXTURE</span>
+            </div>
+
+            <!-- 壁纸模糊 -->
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>壁纸模糊 (Blur)</span>
+                <span class="slider-val-tag" id="val-wp-blur">0px</span>
+              </div>
+              <input type="range" id="slider-wp-blur" class="theme-slider" min="0" max="30" step="1" value="0">
+            </div>
+
+            <!-- 毛玻璃磨砂层 -->
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>毛玻璃深度 (Glass Frost)</span>
+                <span class="slider-val-tag" id="val-wp-frost">0px</span>
+              </div>
+              <input type="range" id="slider-wp-frost" class="theme-slider" min="0" max="40" step="1" value="0">
+            </div>
+
+            <!-- 不透明度 -->
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>壁纸不透明度 (Opacity)</span>
+                <span class="slider-val-tag" id="val-wp-opacity">100%</span>
+              </div>
+              <input type="range" id="slider-wp-opacity" class="theme-slider" min="10" max="100" step="1" value="100">
+            </div>
+          </div>
+
+          <!-- 4. 显示模式与尺寸位置拉条卡片 (居中/铺满/缩放/偏移) -->
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>显示模式与位置缩放 / GEOMETRY</span>
+              <span class="sub-tag">POSITION & SCALE</span>
+            </div>
+
+            <!-- 模式快速切换胶囊 -->
+            <div class="capsule-segment-ctrl" id="wp-fit-mode-ctrl">
+              <button class="segment-btn active" data-fit="cover" type="button">铺满全屏</button>
+              <button class="segment-btn" data-fit="center" type="button">居中保持</button>
+              <button class="segment-btn" data-fit="custom" type="button">自定义拉条</button>
+            </div>
+
+            <!-- 自行拉条区域 (支持自由缩放、上下偏移、左右偏移) -->
+            <div class="wp-custom-geometry-group" id="wp-custom-geometry-group">
+              <!-- 大小缩放 -->
+              <div class="slider-group-item">
+                <div class="slider-label-row">
+                  <span>大小缩放 (Scale / Zoom)</span>
+                  <span class="slider-val-tag" id="val-wp-scale">100%</span>
+                </div>
+                <input type="range" id="slider-wp-scale" class="theme-slider" min="50" max="250" step="1" value="100">
+              </div>
+
+              <!-- 左右水平偏移 -->
+              <div class="slider-group-item">
+                <div class="slider-label-row">
+                  <span>左右偏移 (Position X)</span>
+                  <span class="slider-val-tag" id="val-wp-pos-x">50%</span>
+                </div>
+                <input type="range" id="slider-wp-pos-x" class="theme-slider" min="0" max="100" step="1" value="50">
+              </div>
+
+              <!-- 上下垂直偏移 -->
+              <div class="slider-group-item">
+                <div class="slider-label-row">
+                  <span>上下偏移 (Position Y)</span>
+                  <span class="slider-val-tag" id="val-wp-pos-y">50%</span>
+                </div>
+                <input type="range" id="slider-wp-pos-y" class="theme-slider" min="0" max="100" step="1" value="50">
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. 核心壁纸库板块 (WALLPAPER LIBRARY - 自动持久化存储与参数绑定) -->
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>壁纸库 / WALLPAPER LIBRARY</span>
+              <span class="sub-tag" id="wp-library-count-tag">0 ITEMS</span>
+            </div>
+
+            <div class="wp-library-intro-note">
+              保存或应用的壁纸及全部滤镜参数将自动归档至此，点击即可一键载入全部设置。
+            </div>
+
+            <!-- 壁纸库卡片网格 -->
+            <div class="wp-library-grid" id="wp-library-grid">
+              <!-- JS 动态渲染壁纸库项目 -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 二级板块底部操作条 (应用并保存到壁纸库) -->
+        <div class="theme-footer-bar">
+          <button class="theme-action-btn primary" id="btn-save-wallpaper" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            <span>保存并应用壁纸</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ================= 二级项目板块 2: 图标调整 ================= -->
+      <div class="theme-subpage-view" id="subpage-icons">
+        <div class="theme-content-area">
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>图标规格调节</span>
+              <span class="sub-tag">DIMENSIONS</span>
+            </div>
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>图标整体尺寸</span>
+                <span class="slider-val-tag" id="ic-size-val">50px</span>
+              </div>
+              <input type="range" class="theme-slider" id="ic-size-slider" min="40" max="60" step="1" value="50">
+            </div>
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>图标圆角曲率</span>
+                <span class="slider-val-tag" id="ic-radius-val">15px</span>
+              </div>
+              <input type="range" class="theme-slider" id="ic-radius-slider" min="6" max="25" step="1" value="15">
+            </div>
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>矢量线条粗细</span>
+                <span class="slider-val-tag" id="ic-stroke-val">1.8px</span>
+              </div>
+              <input type="range" class="theme-slider" id="ic-stroke-slider" min="1.0" max="2.6" step="0.2" value="1.8">
+            </div>
+          </div>
+
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>底衬质感与文字</span>
+              <span class="sub-tag">STYLE & LABEL</span>
+            </div>
+            <div class="slider-group-item">
+              <div class="slider-label-row"><span>图标底框质感</span></div>
+              <div class="capsule-segment-ctrl">
+                <button class="segment-btn active" data-icon-bg="white">纯净白框</button>
+                <button class="segment-btn" data-icon-bg="translucent">半透轻磨砂</button>
+                <button class="segment-btn" data-icon-bg="tint">微灰一体</button>
+              </div>
+            </div>
+            <div class="slider-group-item" style="margin-top: 6px;">
+              <div class="slider-label-row">
+                <span>应用名称文字</span>
+                <button class="segment-btn active" id="ic-label-toggle" style="padding: 4px 10px; font-size: 11px;">已开启显示</button>
+              </div>
+            </div>
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>文字字号</span>
+                <span class="slider-val-tag" id="ic-font-val">11px</span>
+              </div>
+              <input type="range" class="theme-slider" id="ic-font-slider" min="9" max="13" step="0.5" value="11">
+            </div>
+          </div>
+        </div>
+        <div class="theme-footer-bar">
+          <button class="theme-action-btn primary subpage-save-btn">保存并应用</button>
+        </div>
+      </div>
+
+      <!-- ================= 二级项目板块 3: 屏幕调整 ================= -->
+      <div class="theme-subpage-view" id="subpage-screen">
+        <div class="theme-content-area">
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>系统底色冷暖</span>
+              <span class="sub-tag">BACKGROUND HUE</span>
+            </div>
+            <div class="capsule-segment-ctrl">
+              <button class="segment-btn active" data-bg-hue="#F1F2F1">经典浅灰</button>
+              <button class="segment-btn" data-bg-hue="#EEEEEC">微暖浅沙</button>
+              <button class="segment-btn" data-bg-hue="#ECEFF1">微冷银霜</button>
+            </div>
+          </div>
+
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>常驻 DOCK 栏调整</span>
+              <span class="sub-tag">DOCK GLASS</span>
+            </div>
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>磨砂毛玻璃深度</span>
+                <span class="slider-val-tag" id="sc-dockblur-val">24px</span>
+              </div>
+              <input type="range" class="theme-slider" id="sc-dockblur-slider" min="0" max="40" step="2" value="24">
+            </div>
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>底色白阶不透明度</span>
+                <span class="slider-val-tag" id="sc-dockalpha-val">78%</span>
+              </div>
+              <input type="range" class="theme-slider" id="sc-dockalpha-slider" min="30" max="100" step="2" value="78">
+            </div>
+          </div>
+
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>主屏全局大卡片圆角</span>
+              <span class="sub-tag">SURFACE RADIUS</span>
+            </div>
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>卡片圆角曲率</span>
+                <span class="slider-val-tag" id="sc-radius-val">22px</span>
+              </div>
+              <input type="range" class="theme-slider" id="sc-radius-slider" min="14" max="30" step="1" value="22">
+            </div>
+          </div>
+        </div>
+        <div class="theme-footer-bar">
+          <button class="theme-action-btn primary subpage-save-btn">保存并应用</button>
+        </div>
+      </div>
+
+      <!-- ================= 二级项目板块 4: 小组件调整 ================= -->
+      <div class="theme-subpage-view" id="subpage-widgets">
+        <div class="theme-content-area">
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>卡片质感表现</span>
+              <span class="sub-tag">SURFACE OPACITY</span>
+            </div>
+            <div class="slider-group-item">
+              <div class="slider-label-row">
+                <span>卡片底色不透明度</span>
+                <span class="slider-val-tag" id="wg-opacity-val">100%</span>
+              </div>
+              <input type="range" class="theme-slider" id="wg-opacity-slider" min="40" max="100" step="2" value="100">
+            </div>
+            <div class="slider-group-item" style="margin-top: 6px;">
+              <div class="slider-label-row">
+                <span>极简细描边</span>
+                <button class="segment-btn active" id="wg-border-toggle" style="padding: 4px 10px; font-size: 11px;">浅灰描边开启</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="subpage-card-panel">
+            <div class="subpage-card-title">
+              <span>文字随笔字体质感</span>
+              <span class="sub-tag">TYPOGRAPHY</span>
+            </div>
+            <div class="capsule-segment-ctrl">
+              <button class="segment-btn active" data-wg-font="default">默认系统</button>
+              <button class="segment-btn" data-wg-font="cat">心呆小猫</button>
+              <button class="segment-btn" data-wg-font="diary">日记第一页</button>
+            </div>
+          </div>
+        </div>
+        <div class="theme-footer-bar">
+          <button class="theme-action-btn primary subpage-save-btn">保存并应用</button>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
   <!-- 全新高级 INS 白灰悬浮窗 Modal -->
@@ -139,6 +658,7 @@
   <script src="js/db.js"></script>
   <script src="js/apps.js"></script>
   <script src="js/widgets.js"></script>
+  <script src="js/theme.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

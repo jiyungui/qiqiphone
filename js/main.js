@@ -50,4 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (window.widgetManager) {
     await window.widgetManager.init();
   }
+  if (window.themeCenter) {
+    await window.themeCenter.init();
+  }
 });

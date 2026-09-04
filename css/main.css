@@ -371,7 +371,15 @@ html, body {
 }
 
 .dock-label {
-  display: none;
+  font-size: var(--app-font-size, 11px);
+  color: var(--text-main);
+  margin-top: 4px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  max-width: 54px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ==========================================================================

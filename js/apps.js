@@ -216,6 +216,12 @@ class AppManager {
   }
 
   launchApp(appId, appName) {
+    if (appId === 'theme') {
+      if (window.themeCenter) {
+        window.themeCenter.open();
+      }
+      return;
+    }
     if (window.widgetManager) {
       window.widgetManager.showToast(`打开 ${appName}`);
     }

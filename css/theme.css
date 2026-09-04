@@ -1,0 +1,908 @@
+/* ==========================================================================
+   美化中心 (THEME & CUSTOMIZATION) 专有样式表
+   高级白灰 INS 悬浮胶囊风 · 极简微光 · 模块化二级导航 · 严禁 Emoji
+   ========================================================================== */
+
+/* 美化中心全屏 App 视图容器（独立运行在 phone-viewport 顶层） */
+.theme-app-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #F2F4F2;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.99);
+  transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1), transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #2D302D;
+}
+
+.theme-app-view.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* 顶部独立导航栏 (含返回键、中英双行标题、当前状态) */
+.theme-nav-bar {
+  height: calc(46px + var(--sat, 0px));
+  padding-top: var(--sat, 0px);
+  padding-left: 18px;
+  padding-right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(242, 244, 242, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  z-index: 40;
+}
+
+.theme-nav-left {
+  display: flex;
+  align-items: center;
+  min-width: 44px;
+}
+
+.theme-back-btn {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #383A38;
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.2, 0.9, 0.3, 1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.theme-back-btn:active {
+  transform: scale(0.92);
+  background: #EAEAEA;
+}
+
+.theme-nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.theme-nav-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1A1C1A;
+  letter-spacing: 0.8px;
+}
+
+.theme-nav-subtitle {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #9EA39E;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.theme-nav-right {
+  min-width: 44px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.theme-reset-btn {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #6C706C;
+  padding: 4px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.theme-reset-btn:hover {
+  color: #1A1C1A;
+  border-color: #2D302D;
+}
+
+.theme-reset-btn:active {
+  transform: scale(0.94);
+  background: #F0F2F0;
+}
+
+/* 主内容滚动区域 */
+.theme-content-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 16px calc(28px + var(--sab, 0px)) 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 顶部状态元信息条 */
+.floating-capsule-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.meta-tag {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: #949A94;
+  text-transform: uppercase;
+}
+
+.meta-count {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  color: #B4B8B4;
+}
+
+/* ================= 悬浮微光胶囊列表主容器 ================= */
+.floating-capsules-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+/* 单个高质感悬浮胶囊 */
+.ins-floating-capsule {
+  position: relative;
+  width: 100%;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid rgba(220, 226, 220, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.035), 0 1px 3px rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ins-floating-capsule:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: #2D302D;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.ins-floating-capsule:active {
+  transform: scale(0.975);
+  background: #F9FAF9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.capsule-frost-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 248, 0.8) 100%);
+  pointer-events: none;
+}
+
+.capsule-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  box-sizing: border-box;
+}
+
+.capsule-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.capsule-num-pill {
+  font-size: 9px;
+  font-weight: 700;
+  font-family: monospace;
+  color: #8C928C;
+  background: #ECEFEC;
+  padding: 3px 6px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.capsule-icon-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 17px;
+  background: #F2F5F2;
+  border: 1px solid #DFE3DF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333633;
+  flex-shrink: 0;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ins-floating-capsule:hover .capsule-icon-circle {
+  background: #252825;
+  color: #FFFFFF;
+  border-color: #252825;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transform: rotate(-4deg);
+}
+
+.capsule-typography {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5px;
+}
+
+.capsule-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.capsule-cn-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1A1C1A;
+  letter-spacing: 0.3px;
+}
+
+.capsule-status-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #BAC0BA;
+}
+
+.ins-floating-capsule:hover .capsule-status-dot {
+  background: #2D302D;
+}
+
+.capsule-en-subtitle {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #A0A5A0;
+  text-transform: uppercase;
+}
+
+.capsule-right {
+  display: flex;
+  align-items: center;
+}
+
+.capsule-arrow-disc {
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  background: #F4F6F4;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9AA09A;
+  flex-shrink: 0;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ins-floating-capsule:hover .capsule-arrow-disc {
+  background: #252825;
+  color: #FFFFFF;
+  border-color: #252825;
+  transform: translateX(3px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.floating-capsule-footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.brand-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.brand-text {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #B0B5B0;
+  text-transform: uppercase;
+}
+
+/* ================= 二级项目板块视图层 (Sub-Pages) ================= */
+.theme-subpage-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #F2F4F2;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.theme-subpage-view.active {
+  transform: translateX(0);
+}
+
+/* ================= 1. 真实屏幕微缩实时预览窗口 ================= */
+.wallpaper-screen-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0 2px 0;
+}
+
+.screen-preview-device {
+  width: 130px;
+  height: 220px;
+  background: #FFFFFF;
+  border-radius: 24px;
+  border: 4px solid #282A28;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09), 0 2px 6px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.screen-preview-notch {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 4px;
+  background: #282A28;
+  border-radius: 2px;
+  z-index: 10;
+}
+
+.screen-preview-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #F1F2F1;
+}
+
+.preview-wallpaper-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+.preview-frost-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.01);
+  transition: backdrop-filter 0.15s ease;
+}
+
+/* 预览微缩 UI 轮廓 */
+.preview-mock-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 8px 10px 8px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.mock-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 7px;
+  font-weight: 700;
+  color: rgba(30, 32, 30, 0.85);
+  font-family: monospace;
+}
+
+.mock-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.mock-bar {
+  width: 3px;
+  height: 5px;
+  background: rgba(30, 32, 30, 0.8);
+  border-radius: 1px;
+}
+
+.mock-battery {
+  width: 8px;
+  height: 4px;
+  border: 0.8px solid rgba(30, 32, 30, 0.8);
+  border-radius: 1.5px;
+}
+
+.mock-widget-capsule {
+  width: 85%;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  border: 0.5px solid rgba(255, 255, 255, 0.8);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 6px;
+  gap: 2px;
+}
+
+.mock-widget-line {
+  width: 50%;
+  height: 2px;
+  background: #4A4E4A;
+  border-radius: 1px;
+}
+
+.mock-widget-sub {
+  width: 30%;
+  height: 1.5px;
+  background: #9FA49F;
+  border-radius: 1px;
+}
+
+.mock-app-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 0 4px;
+}
+
+.mock-app-dot {
+  width: 14px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 4px;
+  border: 0.5px solid rgba(0, 0, 0, 0.05);
+}
+
+.mock-dock-bar {
+  width: 90%;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(6px);
+  border-radius: 11px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+.mock-dock-dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(45, 48, 45, 0.85);
+  border-radius: 3px;
+}
+
+.preview-device-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.preview-tag {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #8E948E;
+  text-transform: uppercase;
+}
+
+.preview-hint {
+  font-size: 9.5px;
+  color: #A2A7A2;
+}
+
+/* ================= 2. 卡片通用与上传/导入 ================= */
+.subpage-card-panel {
+  background: #FFFFFF;
+  border: 1px solid rgba(220, 226, 220, 0.95);
+  border-radius: 20px;
+  padding: 14px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.02);
+}
+
+.subpage-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2D302D;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 6px;
+}
+
+.subpage-card-title span.sub-tag {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #9FA49F;
+}
+
+.wallpaper-source-action-row {
+  display: flex;
+  gap: 8px;
+}
+
+.wp-action-pill-btn {
+  flex: 1;
+  background: #F4F6F4;
+  border: 1px solid #DFE3DF;
+  border-radius: 12px;
+  padding: 9px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #333733;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.wp-action-pill-btn:hover {
+  background: #252825;
+  color: #FFFFFF;
+  border-color: #252825;
+}
+
+.wp-action-pill-btn:active {
+  transform: scale(0.97);
+}
+
+.wp-url-input-wrap {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.wp-ins-text-input {
+  flex: 1;
+  background: #F6F8F6;
+  border: 1px solid #D8DDD8;
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 11px;
+  color: #2D302D;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.wp-ins-text-input:focus {
+  border-color: #2D302D;
+  background: #FFFFFF;
+}
+
+.wp-url-confirm-btn {
+  background: #2D302D;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease;
+}
+
+.wp-url-confirm-btn:active {
+  opacity: 0.85;
+}
+
+/* 自行拉条区域容器 */
+.wp-custom-geometry-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+/* ================= 3. 核心壁纸库板块 ================= */
+.wp-library-intro-note {
+  font-size: 9.5px;
+  color: #8C928C;
+  line-height: 1.4;
+}
+
+.wp-library-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 2px 1px;
+}
+
+.wp-library-card {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  border: 1.5px solid #D8DDD8;
+  background: #F4F6F4;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.wp-library-card:hover {
+  transform: translateY(-2px);
+  border-color: #2D302D;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.wp-library-card.active {
+  border-color: #222522;
+  box-shadow: 0 0 0 2px #222522;
+}
+
+.wp-library-card-tag {
+  align-self: flex-start;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: #252825;
+}
+
+.wp-library-del-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 5;
+}
+
+.wp-library-card:hover .wp-library-del-btn {
+  opacity: 1;
+}
+
+.wp-library-del-btn:hover {
+  background: #1A1C1A;
+}
+
+.wp-library-empty-tip {
+  grid-column: span 3;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 10px;
+  color: #A0A5A0;
+  font-style: italic;
+}
+
+/* 调节滑块与选择控件 */
+.slider-group-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: #4A4E4A;
+}
+
+.slider-val-tag {
+  font-size: 9.5px;
+  color: #7A807A;
+  font-family: monospace;
+  background: #ECEFEC;
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
+.theme-slider {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: #DCE0DC;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.theme-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #2D302D;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  border: 2px solid #FFFFFF;
+  transition: transform 0.12s ease;
+}
+
+.theme-slider::-webkit-slider-thumb:active {
+  transform: scale(1.15);
+}
+
+/* 胶囊分段单选条 */
+.capsule-segment-ctrl {
+  background: #EAECEA;
+  border-radius: 12px;
+  padding: 2.5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+.segment-btn {
+  border: none;
+  background: transparent;
+  padding: 7px 3px;
+  border-radius: 10px;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: #6C706C;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  text-align: center;
+}
+
+.segment-btn.active {
+  background: #FFFFFF;
+  color: #1A1C1A;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  font-weight: 600;
+}
+
+/* 底部应用与保存按钮栏 */
+.theme-footer-bar {
+  padding: 10px 16px calc(12px + var(--sab, 0px)) 16px;
+  background: rgba(242, 244, 242, 0.92);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.theme-action-btn {
+  flex: 1;
+  padding: 11px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.16s ease;
+}
+
+.theme-action-btn.primary {
+  background: #252825;
+  color: #FFFFFF;
+  border: 1px solid #1A1C1A;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-action-btn.primary:active {
+  transform: scale(0.98);
+  background: #141614;
+}
+
+/* 壁纸容器注入到 phone-viewport 底层 */
+#phone-wallpaper-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+/* 确保主视窗内容浮于壁纸层之上且支持透明度透过 */
+.screens-slider, .status-bar, .page-dots, .dock-container {
+  position: relative;
+  z-index: 10;
+}
