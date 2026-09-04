@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="祁祁phone">
+  <meta name="theme-color" content="#F1F2F1">
+  <meta name="format-detection" content="telephone=no">
+  <title>祁祁phone</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <!-- 字体图标 (RemixIcon / 内置SVG) -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/p1-widget.css">
+  <link rel="stylesheet" href="css/p2-widget.css">
+  <link rel="stylesheet" href="css/apps.css">
+  <link rel="stylesheet" href="css/dock.css">
+  <link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+  <div id="phone-container" class="phone-container">
+    <!-- 顶部状态栏 -->
+    <header class="status-bar">
+      <div class="status-left">
+        <span id="status-time" class="status-time">09:41</span>
+      </div>
+      <div class="status-center">
+        <div class="dynamic-island-pill"></div>
+      </div>
+      <div class="status-right">
+        <span class="status-icon signal-icon">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9zm0 2c3.87 0 7 3.13 7 7 0 1.54-.5 2.97-1.35 4.14L12 19.55l-5.65-3.41C5.5 14.97 5 13.54 5 12c0-3.87 3.13-7 7-7z"/></svg>
+        </span>
+        <span class="status-icon wifi-icon">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 2.9c3.8 0 7.23 1.48 9.8 3.91L12 18.23 2.2 10.81C4.77 8.38 8.2 6.9 12 6.9z"/></svg>
+        </span>
+        <span class="status-icon battery-icon">
+          <span class="battery-body"><span class="battery-level" style="width: 88%;"></span></span>
+          <span class="battery-cap"></span>
+        </span>
+      </div>
+    </header>
+
+    <!-- 屏幕滑动区域 (3页) -->
+    <main class="pages-wrapper" id="pages-wrapper">
+      <!-- 第 1 页 -->
+      <section class="screen-page page-1" id="page-1">
+        <div class="page-content">
+          <!-- 顶部小组件 P1 -->
+          <div class="widget-slot slot-p1" id="p1-widget-container">
+            <!-- P1 动态由 p1-widget.js 渲染 -->
+          </div>
+
+          <!-- P1 下方栅格区：左侧 P2 音乐组件 + 右侧 6 个应用图标 -->
+          <div class="page1-lower-grid">
+            <!-- 左侧小组件 P2 -->
+            <div class="widget-slot slot-p2" id="p2-widget-container">
+              <!-- P2 动态由 p2-widget.js 渲染 -->
+            </div>
+
+            <!-- 右侧 6 个 APP -->
+            <div class="right-apps-container" id="page1-apps-container">
+              <!-- 6个APP动态由 apps.js 渲染 -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 第 2 页 (预留空白页框架，后续添加) -->
+      <section class="screen-page page-2" id="page-2">
+        <div class="page-content empty-page">
+          <div class="empty-placeholder">
+            <div class="empty-icon">+</div>
+            <p class="empty-title">第二页</p>
+            <span class="empty-subtitle">轻触或长按添加小组件与应用</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 第 3 页 (预留空白页框架，后续添加) -->
+      <section class="screen-page page-3" id="page-3">
+        <div class="page-content empty-page">
+          <div class="empty-placeholder">
+            <div class="empty-icon">+</div>
+            <p class="empty-title">第三页</p>
+            <span class="empty-subtitle">轻触或长按添加小组件与应用</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 页面指示圆点 -->
+    <div class="pagination-dots" id="pagination-dots">
+      <span class="dot active" data-page="0"></span>
+      <span class="dot" data-page="1"></span>
+      <span class="dot" data-page="2"></span>
+    </div>
+
+    <!-- 底部 Dock 栏 -->
+    <nav class="dock-container" id="dock-container">
+      <!-- Dock 栏应用由 dock.js 渲染 -->
+    </nav>
+
+    <!-- 底部手势横条 (Home Bar) -->
+    <div class="home-indicator"></div>
+  </div>
+
+  <!-- 全局可编辑弹窗 Modal -->
+  <div id="edit-modal-backdrop" class="modal-backdrop hidden">
+    <div class="modal-card" id="edit-modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title">自定义小组件</h3>
+        <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- 动态生成表单 -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="modal-reset-btn">恢复默认</button>
+        <button class="btn btn-primary" id="modal-save-btn">保存并生效</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 轻提示 Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- 核心逻辑脚本 (模块化引入) -->
+  <script src="js/storage.js"></script>
+  <script src="js/p1-widget.js"></script>
+  <script src="js/p2-widget.js"></script>
+  <script src="js/apps.js"></script>
+  <script src="js/dock.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/edit-modal.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
