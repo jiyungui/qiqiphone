@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   
-  <!-- iOS PWA 沉浸式与透明状态栏配置（关键：black-translucent 使 Web 内容完整渗透到灵动岛和刘海区域） -->
+  <!-- iOS PWA 沉浸式与透明状态栏配置 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="祁祁phone">
@@ -63,17 +63,17 @@
       <div class="screen-page" id="page-1">
         <div class="page-one-content">
           <!-- 顶部小组件 (P1 宽幅) -->
-          <div class="widgets-top-section" id="widget-container-p1"></div>
+          <div class="widgets-top-section" id="widget-p1-mount"></div>
 
           <!-- 中部并排小组件 (P2 + P3) -->
           <div class="widgets-mid-row">
-            <div id="widget-container-p2"></div>
-            <div id="widget-container-p3"></div>
+            <div id="widget-p2-mount"></div>
+            <div id="widget-p3-mount"></div>
           </div>
 
           <!-- 第一屏下方 8 个 APP (4列 x 2行) -->
           <div class="page-apps-section">
-            <div class="page-apps-grid" id="apps-grid-page1"></div>
+            <div class="page-apps-grid" id="main-apps-grid"></div>
           </div>
         </div>
       </div>
@@ -82,15 +82,15 @@
       <div class="screen-page" id="page-2">
         <div class="page-two-content">
           <!-- 顶部小组件 (P1 宽幅) -->
-          <div class="widgets-top-section" id="widget-container-page2-p1"></div>
+          <div class="widgets-top-section" id="page2-widget-p1-mount"></div>
 
           <!-- 中部左右分布：左边 2x2 APP，右边小组件 P2 -->
           <div class="page-two-mid-split">
             <!-- 左侧 2x2 无框 APP 矩阵 (视频, 音乐, 小红书, 美团) -->
-            <div class="mid-left-apps-grid" id="apps-grid-page2-mid"></div>
+            <div class="mid-left-apps-grid" id="page2-mid-left-apps"></div>
             
             <!-- 右侧小组件容器 (P2) -->
-            <div class="mid-right-widget-container" id="widget-container-page2-p2"></div>
+            <div class="mid-right-widget-container" id="page2-widget-p2-mount"></div>
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@
 
     <!-- 底部 Dock 栏 (固定 4 个核心应用: 设置, 美化, 短信, 频道) -->
     <div class="dock-container">
-      <div class="dock-bar" id="dock-apps-grid"></div>
+      <div class="dock-bar" id="dock-mount"></div>
     </div>
 
     <!-- ================= 美化中心 (CUSTOMIZATION APP) 专有全屏视图 ================= -->

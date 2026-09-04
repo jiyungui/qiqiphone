@@ -169,7 +169,7 @@ class AppManager {
   }
 
   renderPageOneApps() {
-    const grid = document.getElementById('main-apps-grid');
+    const grid = document.getElementById('main-apps-grid') || document.getElementById('apps-grid-page1');
     if (!grid) return;
 
     grid.innerHTML = PAGE_ONE_APPS.map(app => `
@@ -186,7 +186,7 @@ class AppManager {
 
   renderPageTwoApps() {
     // 渲染第二页中部左侧 4 个 APP (2x2)
-    const midLeftGrid = document.getElementById('page2-mid-left-apps');
+    const midLeftGrid = document.getElementById('page2-mid-left-apps') || document.getElementById('apps-grid-page2-mid');
     if (midLeftGrid) {
       midLeftGrid.innerHTML = PAGE_TWO_MID_LEFT_APPS.map(app => `
         <div class="app-item" onclick="appManager.launchApp('${app.id}', '${app.name}')">
@@ -202,7 +202,7 @@ class AppManager {
   }
 
   renderDockApps() {
-    const dock = document.getElementById('dock-mount');
+    const dock = document.getElementById('dock-mount') || document.getElementById('dock-apps-grid');
     if (!dock) return;
 
     dock.innerHTML = DOCK_APPS.map(app => `

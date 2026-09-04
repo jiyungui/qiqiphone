@@ -1,0 +1,53 @@
+/* ==========================================================================
+   APP 通用与内置独立应用样式占位表
+   高级白灰 INS 极简风 · 纯矢量图标 · 严禁 Emoji
+   ========================================================================== */
+
+/* 全屏内置 APP 基础视图容器 */
+.app-full-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #F2F4F2;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.app-full-view.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* APP 顶部导航栏通用标准 */
+.app-header-bar {
+  height: calc(44px + var(--sat, 0px));
+  padding-top: var(--sat, 0px);
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(242, 244, 242, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+.app-header-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2D302D;
+  letter-spacing: 0.5px;
+}
