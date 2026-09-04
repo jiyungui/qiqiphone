@@ -3,121 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>祁祁phone</title>
   
-  <!-- PWA & 移动端桌面图标与全屏独立运行支持 -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#F1F2F1">
+  <!-- iOS PWA 沉浸式与透明状态栏配置（关键：black-translucent 使 Web 内容完整渗透到灵动岛和刘海区域） -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="祁祁phone">
-  
-  <!-- iOS Safari 添加主屏幕专属高清图标 (火柴人牵手) -->
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/phone-icon-192.png">
-  <link rel="icon" type="image/svg+xml" href="assets/icons/phone-icon.svg">
-  
-  <!-- 模块化样式表 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#F1F2F1">
+  <link rel="manifest" href="manifest.json">
+  <title>祁祁phone</title>
+
+  <!-- 样式引用 -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/widgets.css">
+  <link rel="stylesheet" href="css/apps.css">
   <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
-
+  <!-- 手机外框与视口容器 -->
   <div id="phone-viewport">
     
-    <!-- 顶部极简状态栏 -->
-    <header class="status-bar">
+    <!-- 顶部虚拟状态栏 -->
+    <div class="status-bar" id="phone-status-bar">
       <div class="status-left">
-        <span class="status-time" id="status-time">12:00</span>
+        <span class="status-time" id="status-time">09:41</span>
       </div>
       <div class="status-right">
-        <span class="status-indicator">
+        <!-- 信号图标 -->
+        <span class="status-indicator signal-icon">
           <svg width="17" height="11" viewBox="0 0 17 11" fill="none">
-            <rect x="0" y="8" width="2.5" height="3" rx="0.8" fill="#333"/>
-            <rect x="4.5" y="5.5" width="2.5" height="5.5" rx="0.8" fill="#333"/>
-            <rect x="9" y="3" width="2.5" height="8" rx="0.8" fill="#333"/>
-            <rect x="13.5" y="0" width="2.5" height="11" rx="0.8" fill="#333"/>
+            <rect x="0" y="8" width="2.5" height="3" rx="0.5" fill="currentColor"/>
+            <rect x="4.5" y="5.5" width="2.5" height="5.5" rx="0.5" fill="currentColor"/>
+            <rect x="9" y="3" width="2.5" height="8" rx="0.5" fill="currentColor"/>
+            <rect x="13.5" y="0.5" width="2.5" height="10.5" rx="0.5" fill="currentColor"/>
           </svg>
         </span>
-        <span class="status-indicator">
-          <svg width="15" height="12" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.3" stroke-linecap="round">
-            <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
-            <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
-            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
-            <line x1="12" y1="20" x2="12.01" y2="20"/>
+        <!-- WiFi 图标 -->
+        <span class="status-indicator wifi-icon">
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="none">
+            <path d="M7.5 9.5C8.05228 9.5 8.5 9.05228 8.5 8.5C8.5 7.94772 8.05228 7.5 7.5 7.5C6.94772 7.5 6.5 7.94772 6.5 8.5C6.5 9.05228 6.94772 9.5 7.5 9.5Z" fill="currentColor"/>
+            <path d="M4.5 5.5C5.35 4.65 6.4 4.2 7.5 4.2C8.6 4.2 9.65 4.65 10.5 5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M2 3C3.5 1.5 5.4 0.7 7.5 0.7C9.6 0.7 11.5 1.5 13 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
           </svg>
         </span>
-        <span class="status-indicator">
-          <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="#333" stroke-width="1.8">
-            <rect x="1" y="1" width="19" height="10" rx="3"/>
-            <path d="M22 4.5v3" stroke-linecap="round"/>
-            <rect x="3" y="3" width="13" height="6" rx="1.5" fill="#333"/>
+        <!-- 电池图标 -->
+        <span class="status-indicator battery-icon">
+          <svg width="22" height="11" viewBox="0 0 22 11" fill="none">
+            <rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor" stroke-width="1"/>
+            <rect x="2" y="2" width="12" height="7" rx="1.5" fill="currentColor"/>
+            <path d="M20 3.5C20.6 3.8 21 4.4 21 5.5C21 6.6 20.6 7.2 20 7.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
           </svg>
         </span>
       </div>
-    </header>
-
-    <!-- 主滑动视窗 (主屏幕共两页) -->
-    <main class="screens-slider" id="screens-slider">
-      
-      <!-- ================= 第一页 ================= -->
-      <!-- 顶部小组件 P1 + 中部双列小组件 P2, P3 + 下方 8 个 APP (4列 x 2行) -->
-      <section class="screen-page" id="page-1">
-        <div class="page-one-content">
-          
-          <div class="widgets-top-section">
-            <div id="widget-p1-mount"></div>
-            <div class="widgets-mid-row">
-              <div id="widget-p2-mount"></div>
-              <div id="widget-p3-mount"></div>
-            </div>
-          </div>
-
-          <div class="page-apps-section">
-            <div class="page-apps-grid" id="main-apps-grid"></div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- ================= 第二页 ================= -->
-      <!-- 顶部小组件 P1 (Story Mode) -->
-      <!-- 中部双栏：左侧 2x2 四个APP (视频-恋人之家-闲鱼-美团，无外框) + 右侧小组件 P2 (Memory) -->
-      <section class="screen-page" id="page-2">
-        <div class="page-two-content">
-          
-          <!-- 顶部小组件 P1 -->
-          <div id="page2-widget-p1-mount"></div>
-
-          <!-- 中部并排：左边 2x2 四个 APP + 右边小组件 P2 -->
-          <div class="page-two-mid-split">
-            <div class="mid-left-apps-grid" id="page2-mid-left-apps"></div>
-            <div class="mid-right-widget-container" id="page2-widget-p2-mount"></div>
-          </div>
-
-        </div>
-      </section>
-
-    </main>
-
-    <!-- 底部两页分页指示器 -->
-    <div class="page-dots">
-      <span class="page-dot active"></span>
-      <span class="page-dot"></span>
     </div>
 
-    <!-- 底部 Dock 栏: 设置 - 美化 - 短信 - 频道 -->
-    <nav class="dock-container" id="dock-mount"></nav>
+    <!-- 主屏幕左右滑动容器 (两页系统) -->
+    <div class="screens-slider" id="screens-slider">
+      <!-- 第一屏：顶部小组件 + 中部并排小组件 + 下方 8 个 APP -->
+      <div class="screen-page" id="page-1">
+        <div class="page-one-content">
+          <!-- 顶部小组件 (P1 宽幅) -->
+          <div class="widgets-top-section" id="widget-container-p1"></div>
 
-    <!-- ================= 美化 APP 全屏独立界面 (THEME CENTER) ================= -->
+          <!-- 中部并排小组件 (P2 + P3) -->
+          <div class="widgets-mid-row">
+            <div id="widget-container-p2"></div>
+            <div id="widget-container-p3"></div>
+          </div>
+
+          <!-- 第一屏下方 8 个 APP (4列 x 2行) -->
+          <div class="page-apps-section">
+            <div class="page-apps-grid" id="apps-grid-page1"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二屏：顶部小组件 + 中部左侧 2x2 APP & 右侧小组件 + 留白 -->
+      <div class="screen-page" id="page-2">
+        <div class="page-two-content">
+          <!-- 顶部小组件 (P1 宽幅) -->
+          <div class="widgets-top-section" id="widget-container-page2-p1"></div>
+
+          <!-- 中部左右分布：左边 2x2 APP，右边小组件 P2 -->
+          <div class="page-two-mid-split">
+            <!-- 左侧 2x2 无框 APP 矩阵 (视频, 音乐, 小红书, 美团) -->
+            <div class="mid-left-apps-grid" id="apps-grid-page2-mid"></div>
+            
+            <!-- 右侧小组件容器 (P2) -->
+            <div class="mid-right-widget-container" id="widget-container-page2-p2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 分页指示器 (纯白灰小圆点) -->
+    <div class="page-dots">
+      <span class="dot active" data-page="0"></span>
+      <span class="dot" data-page="1"></span>
+    </div>
+
+    <!-- 底部 Dock 栏 (固定 4 个核心应用: 设置, 美化, 短信, 频道) -->
+    <div class="dock-container">
+      <div class="dock-bar" id="dock-apps-grid"></div>
+    </div>
+
+    <!-- ================= 美化中心 (CUSTOMIZATION APP) 专有全屏视图 ================= -->
     <div class="theme-app-view" id="theme-app-view">
       <!-- 独立沉浸式顶部导航栏 -->
       <header class="theme-nav-bar">
         <div class="theme-nav-left">
-          <button class="theme-back-btn" id="theme-back-btn" title="返回">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="theme-back-btn" id="theme-back-btn" title="返回" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
@@ -127,30 +123,26 @@
           <span class="theme-nav-subtitle" id="theme-header-sub">FLOATING CAPSULES</span>
         </div>
         <div class="theme-nav-right">
-          <button class="theme-reset-btn" id="theme-reset-btn">重置</button>
+          <button class="theme-reset-btn" id="theme-reset-btn" type="button">重置</button>
         </div>
       </header>
 
-      <!-- 主层级：高级 INS 悬浮微光胶囊列表 -->
+      <!-- 主视图：四大悬浮微光胶囊列表 -->
       <div class="theme-content-area" id="theme-main-menu">
-        
-        <!-- 顶部极简 INS 状态小标 -->
         <div class="floating-capsule-meta">
-          <span class="meta-tag">SYSTEM PREFERENCES</span>
-          <span class="meta-count">4 CAPSULES</span>
+          <span class="meta-tag">SYSTEM CUSTOMIZE</span>
+          <span class="meta-count">4 MODULES</span>
         </div>
 
-        <!-- 悬浮胶囊主列表 -->
         <div class="floating-capsules-stack">
-
           <!-- 胶囊 1: 壁纸调整 -->
           <div class="ins-floating-capsule" data-target-section="wallpaper">
             <div class="capsule-frost-bg"></div>
             <div class="capsule-inner">
               <div class="capsule-left">
-                <div class="capsule-num-pill">01</div>
+                <span class="capsule-num-pill">01</span>
                 <div class="capsule-icon-circle">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
                     <circle cx="8.5" cy="8.5" r="1.5"></circle>
                     <polyline points="21 15 16 10 5 21"></polyline>
@@ -166,7 +158,7 @@
               </div>
               <div class="capsule-right">
                 <div class="capsule-arrow-disc">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </div>
@@ -179,9 +171,9 @@
             <div class="capsule-frost-bg"></div>
             <div class="capsule-inner">
               <div class="capsule-left">
-                <div class="capsule-num-pill">02</div>
+                <span class="capsule-num-pill">02</span>
                 <div class="capsule-icon-circle">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="3" width="7" height="7" rx="2"></rect>
                     <rect x="14" y="3" width="7" height="7" rx="2"></rect>
                     <rect x="14" y="14" width="7" height="7" rx="2"></rect>
@@ -193,12 +185,12 @@
                     <span class="capsule-cn-title">图标调整</span>
                     <span class="capsule-status-dot"></span>
                   </div>
-                  <span class="capsule-en-subtitle">ICONS & MORPHOLOGY</span>
+                  <span class="capsule-en-subtitle">ICONS & SPECIFICATION</span>
                 </div>
               </div>
               <div class="capsule-right">
                 <div class="capsule-arrow-disc">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </div>
@@ -211,11 +203,11 @@
             <div class="capsule-frost-bg"></div>
             <div class="capsule-inner">
               <div class="capsule-left">
-                <div class="capsule-num-pill">03</div>
+                <span class="capsule-num-pill">03</span>
                 <div class="capsule-icon-circle">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="4" y="2" width="16" height="20" rx="4" ry="4"></rect>
-                    <circle cx="12" cy="18" r="0.9" fill="currentColor"></circle>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
                   </svg>
                 </div>
                 <div class="capsule-typography">
@@ -228,7 +220,7 @@
               </div>
               <div class="capsule-right">
                 <div class="capsule-arrow-disc">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </div>
@@ -241,10 +233,10 @@
             <div class="capsule-frost-bg"></div>
             <div class="capsule-inner">
               <div class="capsule-left">
-                <div class="capsule-num-pill">04</div>
+                <span class="capsule-num-pill">04</span>
                 <div class="capsule-icon-circle">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="3.5"></rect>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="3" ry="3"></rect>
                     <line x1="8" y1="21" x2="16" y2="21"></line>
                     <line x1="12" y1="17" x2="12" y2="21"></line>
                   </svg>
@@ -259,31 +251,28 @@
               </div>
               <div class="capsule-right">
                 <div class="capsule-arrow-disc">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
 
-        <!-- 底部极简 INS 印章装饰 -->
+        <!-- 底部极简品牌刻印 -->
         <div class="floating-capsule-footer-brand">
           <span class="brand-line"></span>
-          <span class="brand-text">QI QI PHONE · AESTHETIC STUDIO</span>
+          <span class="brand-text">QiQi Phone Pure Aesthetic</span>
           <span class="brand-line"></span>
         </div>
-
       </div>
 
-      <!-- ================= 二级项目板块 1: 壁纸调整 ================= -->
       <!-- ================= 二级项目板块 1: 壁纸调整 ================= -->
       <div class="theme-subpage-view" id="subpage-wallpaper">
         <div class="theme-content-area">
           
-          <!-- 1. 顶部真实手机屏幕微缩实时预览窗口 -->
+          <!-- 1. 纯净 9:16 屏幕实时微缩预览视窗 -->
           <div class="subpage-card-panel wp-preview-clean-panel">
             <div class="subpage-card-title">
               <span>屏幕效果预览 / SCREEN PREVIEW</span>
@@ -472,63 +461,16 @@
       <div class="theme-subpage-view" id="subpage-icons">
         <div class="theme-content-area">
           <div class="subpage-card-panel">
-            <div class="subpage-card-title">
-              <span>图标规格调节</span>
-              <span class="sub-tag">DIMENSIONS</span>
+            <div class="subpage-card-title">图标大小与圆角 / GEOMETRY</div>
+            <div class="slider-group-item">
+              <div class="slider-label-row"><span>图标尺寸 (Size)</span><span class="slider-val-tag" id="val-icon-size">50px</span></div>
+              <input type="range" id="slider-icon-size" class="theme-slider" min="40" max="64" value="50">
             </div>
             <div class="slider-group-item">
-              <div class="slider-label-row">
-                <span>图标整体尺寸</span>
-                <span class="slider-val-tag" id="ic-size-val">50px</span>
-              </div>
-              <input type="range" class="theme-slider" id="ic-size-slider" min="40" max="60" step="1" value="50">
-            </div>
-            <div class="slider-group-item">
-              <div class="slider-label-row">
-                <span>图标圆角曲率</span>
-                <span class="slider-val-tag" id="ic-radius-val">15px</span>
-              </div>
-              <input type="range" class="theme-slider" id="ic-radius-slider" min="6" max="25" step="1" value="15">
-            </div>
-            <div class="slider-group-item">
-              <div class="slider-label-row">
-                <span>矢量线条粗细</span>
-                <span class="slider-val-tag" id="ic-stroke-val">1.8px</span>
-              </div>
-              <input type="range" class="theme-slider" id="ic-stroke-slider" min="1.0" max="2.6" step="0.2" value="1.8">
+              <div class="slider-label-row"><span>圆角弧度 (Radius)</span><span class="slider-val-tag" id="val-icon-radius">15px</span></div>
+              <input type="range" id="slider-icon-radius" class="theme-slider" min="0" max="25" value="15">
             </div>
           </div>
-
-          <div class="subpage-card-panel">
-            <div class="subpage-card-title">
-              <span>底衬质感与文字</span>
-              <span class="sub-tag">STYLE & LABEL</span>
-            </div>
-            <div class="slider-group-item">
-              <div class="slider-label-row"><span>图标底框质感</span></div>
-              <div class="capsule-segment-ctrl">
-                <button class="segment-btn active" data-icon-bg="white">纯净白框</button>
-                <button class="segment-btn" data-icon-bg="translucent">半透轻磨砂</button>
-                <button class="segment-btn" data-icon-bg="tint">微灰一体</button>
-              </div>
-            </div>
-            <div class="slider-group-item" style="margin-top: 6px;">
-              <div class="slider-label-row">
-                <span>应用名称文字</span>
-                <button class="segment-btn active" id="ic-label-toggle" style="padding: 4px 10px; font-size: 11px;">已开启显示</button>
-              </div>
-            </div>
-            <div class="slider-group-item">
-              <div class="slider-label-row">
-                <span>文字字号</span>
-                <span class="slider-val-tag" id="ic-font-val">11px</span>
-              </div>
-              <input type="range" class="theme-slider" id="ic-font-slider" min="9" max="13" step="0.5" value="11">
-            </div>
-          </div>
-        </div>
-        <div class="theme-footer-bar">
-          <button class="theme-action-btn primary subpage-save-btn">保存并应用</button>
         </div>
       </div>
 
@@ -536,54 +478,12 @@
       <div class="theme-subpage-view" id="subpage-screen">
         <div class="theme-content-area">
           <div class="subpage-card-panel">
-            <div class="subpage-card-title">
-              <span>系统底色冷暖</span>
-              <span class="sub-tag">BACKGROUND HUE</span>
-            </div>
-            <div class="capsule-segment-ctrl">
-              <button class="segment-btn active" data-bg-hue="#F1F2F1">经典浅灰</button>
-              <button class="segment-btn" data-bg-hue="#EEEEEC">微暖浅沙</button>
-              <button class="segment-btn" data-bg-hue="#ECEFF1">微冷银霜</button>
+            <div class="subpage-card-title">Dock栏毛玻璃深度 / DOCK FROST</div>
+            <div class="slider-group-item">
+              <div class="slider-label-row"><span>模糊深度 (Blur)</span><span class="slider-val-tag" id="val-dock-blur">24px</span></div>
+              <input type="range" id="slider-dock-blur" class="theme-slider" min="0" max="40" value="24">
             </div>
           </div>
-
-          <div class="subpage-card-panel">
-            <div class="subpage-card-title">
-              <span>常驻 DOCK 栏调整</span>
-              <span class="sub-tag">DOCK GLASS</span>
-            </div>
-            <div class="slider-group-item">
-              <div class="slider-label-row">
-                <span>磨砂毛玻璃深度</span>
-                <span class="slider-val-tag" id="sc-dockblur-val">24px</span>
-              </div>
-              <input type="range" class="theme-slider" id="sc-dockblur-slider" min="0" max="40" step="2" value="24">
-            </div>
-            <div class="slider-group-item">
-              <div class="slider-label-row">
-                <span>底色白阶不透明度</span>
-                <span class="slider-val-tag" id="sc-dockalpha-val">78%</span>
-              </div>
-              <input type="range" class="theme-slider" id="sc-dockalpha-slider" min="30" max="100" step="2" value="78">
-            </div>
-          </div>
-
-          <div class="subpage-card-panel">
-            <div class="subpage-card-title">
-              <span>主屏全局大卡片圆角</span>
-              <span class="sub-tag">SURFACE RADIUS</span>
-            </div>
-            <div class="slider-group-item">
-              <div class="slider-label-row">
-                <span>卡片圆角曲率</span>
-                <span class="slider-val-tag" id="sc-radius-val">22px</span>
-              </div>
-              <input type="range" class="theme-slider" id="sc-radius-slider" min="14" max="30" step="1" value="22">
-            </div>
-          </div>
-        </div>
-        <div class="theme-footer-bar">
-          <button class="theme-action-btn primary subpage-save-btn">保存并应用</button>
         </div>
       </div>
 
@@ -591,73 +491,23 @@
       <div class="theme-subpage-view" id="subpage-widgets">
         <div class="theme-content-area">
           <div class="subpage-card-panel">
-            <div class="subpage-card-title">
-              <span>卡片质感表现</span>
-              <span class="sub-tag">SURFACE OPACITY</span>
-            </div>
+            <div class="subpage-card-title">小组件底卡透明度 / OPACITY</div>
             <div class="slider-group-item">
-              <div class="slider-label-row">
-                <span>卡片底色不透明度</span>
-                <span class="slider-val-tag" id="wg-opacity-val">100%</span>
-              </div>
-              <input type="range" class="theme-slider" id="wg-opacity-slider" min="40" max="100" step="2" value="100">
-            </div>
-            <div class="slider-group-item" style="margin-top: 6px;">
-              <div class="slider-label-row">
-                <span>极简细描边</span>
-                <button class="segment-btn active" id="wg-border-toggle" style="padding: 4px 10px; font-size: 11px;">浅灰描边开启</button>
-              </div>
+              <div class="slider-label-row"><span>卡片不透明度 (Alpha)</span><span class="slider-val-tag" id="val-widget-alpha">85%</span></div>
+              <input type="range" id="slider-widget-alpha" class="theme-slider" min="20" max="100" value="85">
             </div>
           </div>
-
-          <div class="subpage-card-panel">
-            <div class="subpage-card-title">
-              <span>文字随笔字体质感</span>
-              <span class="sub-tag">TYPOGRAPHY</span>
-            </div>
-            <div class="capsule-segment-ctrl">
-              <button class="segment-btn active" data-wg-font="default">默认系统</button>
-              <button class="segment-btn" data-wg-font="cat">心呆小猫</button>
-              <button class="segment-btn" data-wg-font="diary">日记第一页</button>
-            </div>
-          </div>
-        </div>
-        <div class="theme-footer-bar">
-          <button class="theme-action-btn primary subpage-save-btn">保存并应用</button>
         </div>
       </div>
 
     </div>
 
   </div>
-
-  <!-- 全新高级 INS 白灰悬浮窗 Modal -->
-  <div class="modal-overlay" id="edit-modal">
-    <div class="modal-floating-card">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <span class="modal-title" id="modal-title">自定义组件</span>
-          <span class="modal-sub-tag">WIDGET CONFIG</span>
-        </div>
-        <button class="modal-close-btn" id="modal-close-btn" title="关闭">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <div class="modal-body" id="modal-body-fields"></div>
-      <div class="modal-footer">
-        <button class="btn-cancel" id="modal-cancel-btn">取消</button>
-        <button class="btn-save" id="modal-save-btn">保存更改</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 极简轻量提示 Toast -->
-  <div class="toast-msg" id="toast"></div>
 
   <!-- 核心逻辑脚本 -->
   <script src="js/db.js"></script>
-  <script src="js/apps.js"></script>
   <script src="js/widgets.js"></script>
+  <script src="js/apps.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/main.js"></script>
 </body>
