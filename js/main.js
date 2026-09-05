@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateTime();
   setInterval(updateTime, 1000);
 
-  // 3. 滑动分页指示器联动 (三页联动)
+  // 3. 滑动分页指示器联动 (支持点击与滚动联动)
   const slider = document.getElementById('screens-slider');
   const dots = document.querySelectorAll('.page-dot');
 
@@ -41,6 +41,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
     }, { passive: true });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const pageIdx = parseInt(dot.getAttribute('data-page'), 10) || 0;
+        slider.scrollTo({
+          left: pageIdx * slider.clientWidth,
+          behavior: 'smooth'
+        });
+      });
+    });
   }
 
   // 4. 初始化应用与小组件

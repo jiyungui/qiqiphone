@@ -860,7 +860,15 @@
 }
 
 /* 确保主视窗内容浮于壁纸层之上且支持透明度透过 */
-.screens-slider, .status-bar, .page-dots, .dock-container {
+.screens-slider, .status-bar, .page-dots {
   position: relative;
   z-index: 10;
+}
+.dock-container {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 30 !important;
 }

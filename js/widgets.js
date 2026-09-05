@@ -717,6 +717,8 @@ class WidgetManager {
   }
 
   bindModalEvents() {
+    if (!this.modalEl) return;
+
     const closeBtn = document.getElementById('modal-close-btn');
     if (closeBtn) closeBtn.addEventListener('click', () => this.closeModal());
     

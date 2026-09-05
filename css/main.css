@@ -373,20 +373,23 @@ html, body {
   padding: 0 10px;
 }
 
-.dock-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
+.dock-item, .dock-bar .app-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 3px !important;
   cursor: pointer;
+  flex: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
 
-.dock-item:active {
+.dock-item:active, .dock-bar .app-item:active {
   transform: scale(0.9);
 }
 
-.dock-icon-wrapper, .dock-icon-box {
+.dock-icon-wrapper, .dock-icon-box, .dock-app-icon {
   width: 38px;
   height: 38px;
   border-radius: 12px;
@@ -396,17 +399,19 @@ html, body {
   align-items: center;
   justify-content: center;
   color: var(--text-main);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-.dock-icon-wrapper svg, .dock-icon-box svg {
+.dock-icon-wrapper svg, .dock-icon-box svg, .dock-app-icon svg {
   width: 19px;
   height: 19px;
 }
 
-.dock-label {
+.dock-label, .dock-item .app-name, .dock-bar .app-name {
   font-size: var(--app-font-size, 11px);
   font-weight: 500;
   color: var(--text-main);
+  text-align: center;
 }
 
 /* ================= 移动端实机与 PWA 全屏适配 =================
